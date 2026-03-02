@@ -3,7 +3,7 @@
 @import 'shadcn/tailwind.css';
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -81,6 +81,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --editor-selection-bg: oklch(0 0 0 / 0.2);
 }
 
 .dark {
@@ -115,6 +116,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --editor-selection-bg: oklch(1 0 0 / 0.2);
 }
 
 @layer base {
@@ -132,11 +134,11 @@
   --code-border-clr: oklch(90.2% 0 0);
   --pre-code-clr: oklch(10% 0 0);
   --line-through-clr: oklch(70% 0 0);
-  --selection-bg: oklch(0 0 0 / 0.2);
+  --selection-bg: var(--editor-selection-bg);
   --task-list-accent-clr: oklch(0 0 0);
   --list-marker-clr: oklch(40% 0 0);
 
-  --editor-default-text-clr: oklch(20% 0 0);
+  --editor-default-text-clr: var(--primary);
 
   p {
     margin-block: 0.5rem;
@@ -211,7 +213,10 @@
       margin: 0;
     }
     li::marker {
-      color: var(--list-marker-clr);
+      color: var(--muted-foreground);
+    }
+    li * {
+      color: inherit;
     }
   }
 
@@ -232,7 +237,6 @@
     li[data-checked='true'] {
       div {
         text-decoration: line-through;
-        color: var(--line-through-clr);
       }
     }
     input[type='checkbox'] {
@@ -240,5 +244,17 @@
       cursor: pointer;
       flex-shrink: 0;
     }
+  }
+}
+div:has(.tiptap-bubble-menu-inner-element) {
+  transition:
+    left 150ms ease-out,
+    top 150ms ease-out;
+  will-change: left, top;
+}
+
+@media (pointer: fine) {
+  button {
+    cursor: pointer;
   }
 }

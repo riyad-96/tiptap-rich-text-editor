@@ -1,3 +1,4 @@
+import { Toggle } from '@/components/ui';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -6,15 +7,17 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { type Editor } from '@tiptap/core';
+import { useEditorState } from '@tiptap/react';
+import { LinkIcon, UnlinkIcon } from 'lucide-react';
 import { useState } from 'react';
 
-export function LinkComponent({
-  editor,
-  children,
-}: {
-  editor: Editor;
-  children: React.ReactNode;
-}) {
+export function ToolbarLink({ editor }: { editor: Editor }) {
+  const editorState = useEditorState({
+    editor,
+    selector: (ctx) => ({
+      isLink: ctx.editor.isActive('link'),
+    }),
+  });
   const [linkUrl, setLinkUrl] = useState('');
   const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
 
@@ -35,7 +38,24 @@ export function LinkComponent({
 
   return (
     <Popover open={isLinkPopoverOpen} onOpenChange={setIsLinkPopoverOpen}>
-      <PopoverTrigger asChild>{children}</PopoverTrigger>
+      <PopoverTrigger asChild>
+        {editorState.isLink ? (
+          <Toggle
+            size="sm"
+            aria-label="Toggle link"
+            pressed
+            onPressedChange={() =>
+              editor.chain().focus().extendMarkRange('link').unsetLink().run()
+            }
+          >
+            <UnlinkIcon className="size-4" />
+          </Toggle>
+        ) : (
+          <Button size="sm" variant="ghost" aria-label="Toggle link">
+            <LinkIcon className="size-4" />
+          </Button>
+        )}
+      </PopoverTrigger>
 
       <PopoverContent className="w-80 p-4">
         <div className="flex flex-col gap-4">

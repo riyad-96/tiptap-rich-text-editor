@@ -13,11 +13,11 @@ import {
   UnderlineIcon,
   UnlinkIcon,
 } from 'lucide-react';
-import { LinkComponent } from './tooltip-link';
 import { ToolbarSeparator } from './toolbar-separator';
 import { ToolbarHeadings } from './toolbar-headings';
 import { ToolbarLists } from './toolbar-lists';
 import { ToolbarColorSelector } from './toolbar-color-selector';
+import { ToolbarLink } from './toolbar-link';
 
 export function BubbleMenu({ editor }: { editor: Editor }) {
   const editorState = useEditorState({
@@ -50,8 +50,9 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
     <TiptapBubbleMenu
       editor={editor}
       className={
-        'flex flex-wrap items-center gap-1 bg-white shadow-lg rounded-md border p-1'
+        'tiptap-bubble-menu-inner-element flex flex-wrap items-center gap-1 bg-white shadow-lg rounded-md border p-1'
       }
+      updateDelay={80}
     >
       <ToolbarHeadings editor={editor} />
       <ToolbarLists editor={editor} />
@@ -123,24 +124,7 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
 
       <div className="bg-border mx-1 h-6 w-px" />
 
-      {editorState.isLink ? (
-        <Toggle
-          size="sm"
-          aria-label="Toggle link"
-          pressed
-          onPressedChange={() =>
-            editor.chain().focus().extendMarkRange('link').unsetLink().run()
-          }
-        >
-          <UnlinkIcon className="size-4" />
-        </Toggle>
-      ) : (
-        <LinkComponent editor={editor}>
-          <Toggle size="sm" aria-label="Toggle link">
-            <LinkIcon className="size-4" />
-          </Toggle>
-        </LinkComponent>
-      )}
+      <ToolbarLink editor={editor} />
     </TiptapBubbleMenu>
   );
 }

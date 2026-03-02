@@ -6,18 +6,18 @@ import {
   CodeSquareIcon,
   CodeXmlIcon,
   ItalicIcon,
-  LinkIcon,
   StrikethroughIcon,
   TextQuoteIcon,
   UnderlineIcon,
-  UnlinkIcon,
 } from 'lucide-react';
-import { LinkComponent } from './tooltip-link';
+import { ToolbarLink } from './toolbar-link';
 import { ToolbarHeadings } from './toolbar-headings';
 import { ToolbarSeparator } from './toolbar-separator';
 import { ToolbarLists } from './toolbar-lists';
 import { ToolbalUndoRedo } from './toolbar-undo-redo';
 import { ToolbarColorSelector } from './toolbar-color-selector';
+import { ToolbarAlign } from './toolbar-align';
+import { ToolbarSupSubscript } from './toolbar-super-sub-script';
 
 export function ToolBar({ editor }: { editor: Editor }) {
   const editorState = useEditorState({
@@ -35,7 +35,6 @@ export function ToolBar({ editor }: { editor: Editor }) {
         isOrderedList: ctx.editor.isActive('orderedList'),
         isTaskList: ctx.editor.isActive('taskList'),
         isBlockquote: ctx.editor.isActive('blockquote'),
-        isLink: ctx.editor.isActive('link'),
         canRedo: editor.can().redo(),
         canUndo: editor.can().undo(),
         isH2: ctx.editor.isActive('heading', { level: 2 }),
@@ -49,7 +48,9 @@ export function ToolBar({ editor }: { editor: Editor }) {
   });
 
   return (
-    <div className={'sticky top-0 flex flex-wrap items-center gap-1 border-b p-2'}>
+    <div
+      className={'sticky top-0 flex flex-wrap items-center gap-1 border-b p-2'}
+    >
       <ToolbalUndoRedo editor={editor} />
 
       <ToolbarSeparator />
@@ -124,24 +125,15 @@ export function ToolBar({ editor }: { editor: Editor }) {
 
       <div className="bg-border mx-1 h-6 w-px" />
 
-      {editorState.isLink ? (
-        <Toggle
-          size="sm"
-          aria-label="Toggle link"
-          pressed
-          onPressedChange={() =>
-            editor.chain().focus().extendMarkRange('link').unsetLink().run()
-          }
-        >
-          <UnlinkIcon className="size-4" />
-        </Toggle>
-      ) : (
-        <LinkComponent editor={editor}>
-          <Toggle size="sm" aria-label="Toggle link">
-            <LinkIcon className="size-4" />
-          </Toggle>
-        </LinkComponent>
-      )}
+      <ToolbarLink editor={editor} />
+
+      <ToolbarSeparator />
+
+      <ToolbarAlign editor={editor} />
+
+      <ToolbarSeparator />
+
+      <ToolbarSupSubscript editor={editor} />
     </div>
   );
 }
