@@ -130,9 +130,13 @@
 .tiptap-text-editor.tiptap-text-editor {
   --code-bg-clr: oklch(96.2% 0 0);
   --code-border-clr: oklch(90.2% 0 0);
+  --pre-code-clr: oklch(10% 0 0);
+  --line-through-clr: oklch(70% 0 0);
+  --selection-bg: oklch(0 0 0 / 0.2);
+  --task-list-accent-clr: oklch(0 0 0);
 
   *::selection {
-    background-color: hsla(0, 0%, 0%, 0.2);
+    background-color: var(--selection-bg);
   }
 
   code::before,
@@ -158,7 +162,7 @@
     border-radius: 0.555rem;
 
     code {
-      color: black;
+      color: var(--pre-code-clr);
     }
   }
 
@@ -187,12 +191,13 @@
     li[data-checked='true'] {
       div {
         text-decoration: line-through;
-        color: oklch(70% 0 0);
+        color: var(--line-through-clr);
       }
     }
     input[type='checkbox'] {
-      accent-color: black;
+      accent-color: var(--task-list-accent-clr);
       cursor: pointer;
+      flex-shrink: 0;
     }
   }
 }
