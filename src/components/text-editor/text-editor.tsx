@@ -29,9 +29,11 @@ export type TextEditorProps = {
 };
 
 export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
-  const [content, setContent] = useState(
-    '<h2><span style="color: rgb(37, 99, 235);">Todos</span></h2><ul data-type="taskList"><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>side by side view</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>json format</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>slash command</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>image upload</p></div></li></ul><p></p>',
-  );
+  const [content, setContent] = useState<Content>(null);
+
+  // const [content, setContent] = useState<Content>(
+  //   '<h2><span style="color: rgb(37, 99, 235);">Todos</span></h2><ul data-type="taskList"><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>side by side view</p></div></li><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>test json as tiptap content</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>slash command</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>image upload</p></div></li></ul><p></p>',
+  // );
 
   const editor = useEditor({
     extensions: [
@@ -56,12 +58,16 @@ export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
     },
     content,
     onUpdate: (v) => {
-      setContent(v.editor.getHTML());
-      console.log(v.editor.getHTML());
-      console.log(v.editor.getJSON());
+      setContent(v.editor.getJSON());
+      // setContent(v.editor.getHTML());
+
       if (typeof onChange == 'function') {
         onChange(v);
       }
+
+      // print to console
+      console.log(v.editor.getHTML());
+      console.log(v.editor.getJSON());
     },
   });
 
