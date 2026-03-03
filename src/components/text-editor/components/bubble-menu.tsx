@@ -28,7 +28,7 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
     <TiptapBubbleMenu
       editor={editor}
       className={
-        'tiptap-bubble-menu-inner-element flex flex-wrap items-center gap-1 bg-background shadow-lg rounded-md border p-1'
+        'tiptap-bubble-menu-inner-element bg-background flex flex-wrap items-center gap-1 rounded-md border p-1 shadow-lg'
       }
       updateDelay={80}
     >

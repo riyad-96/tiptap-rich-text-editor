@@ -27,7 +27,7 @@ export function ToolBar({ editor }: { editor: Editor }) {
   return (
     <div
       className={
-        'sticky top-0 flex items-center gap-1 border-b p-2 bg-background min-w-0 overflow-x-auto'
+        'bg-background sticky top-0 flex min-w-0 items-center gap-1 overflow-x-auto border-b p-2'
       }
     >
       <ToolbalUndoRedo editor={editor} />

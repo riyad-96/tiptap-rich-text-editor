@@ -92,10 +92,10 @@ export function ToolbarLink({
                 handleSetLink();
               }
             }}
-            className="outline-none py-1.5 px-4 text-sm"
+            className="px-4 py-1.5 text-sm outline-none"
           />
 
-          <div className="flex gap-1 items-center">
+          <div className="flex items-center gap-1">
             <Button
               variant="ghost"
               size="sm"

@@ -55,7 +55,7 @@ export function ToolbarAlign({ editor }: { editor: Editor }) {
   ];
 
   return (
-    <div className="flex gap-1 items-center">
+    <div className="flex items-center gap-1">
       {alignments.map((a) => (
         <Toggle
           key={a.id}

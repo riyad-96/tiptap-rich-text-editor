@@ -30,7 +30,7 @@ export type TextEditorProps = {
 
 export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
   const [content, setContent] = useState(
-    '<h2>This is a super cool heading</h2><h3>This is a super cool heading</h3><h4>This is a super cool heading</h4><p>This is a paragraph</p><ul><li><p>Unordered list 1</p></li><li><p>Unordered list 2</p></li><li><p>Unordered list 3</p></li></ul><ol><li><p>Ordered list 1</p></li><li><p>Ordered list 2</p></li><li><p>Ordered list 3</p></li></ol><ul data-type="taskList"><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>Task list 1</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>Task list 2</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>Task list 3</p></div></li></ul><p></p>',
+    '<h2><span style="color: rgb(37, 99, 235);">Todos</span></h2><ul data-type="taskList"><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>side by side view</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>json format</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>slash command</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>image upload</p></div></li></ul><p></p>',
   );
 
   const editor = useEditor({
@@ -57,6 +57,8 @@ export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
     content,
     onUpdate: (v) => {
       setContent(v.editor.getHTML());
+      console.log(v.editor.getHTML());
+      console.log(v.editor.getJSON());
       if (typeof onChange == 'function') {
         onChange(v);
       }
@@ -76,7 +78,7 @@ export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
     <TooltipProvider>
       <EditorContent
         editor={editor}
-        className="border rounded-md overflow-hidden text-primary"
+        className="text-primary overflow-hidden rounded-md border"
       >
         {editor && (
           <>

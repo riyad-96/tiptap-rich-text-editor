@@ -3,7 +3,7 @@ import { ThemeToggler } from '@/components/theme-toggle/theme-toggler';
 
 export default function page() {
   return (
-    <div className="max-w-250 mx-auto py-20 px-4">
+    <div className="mx-auto max-w-250 px-4 py-20">
       <ThemeToggler />
       <TextEditor />
     </div>

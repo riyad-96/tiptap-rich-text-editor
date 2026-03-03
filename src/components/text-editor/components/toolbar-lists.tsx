@@ -81,7 +81,7 @@ export function ToolbarLists({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent align="start" className="p-1 w-fit grid">
+      <PopoverContent align="start" className="grid w-fit p-1">
         {lists.map((l) => (
           <Button
             key={l.id}

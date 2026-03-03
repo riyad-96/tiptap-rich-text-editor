@@ -99,7 +99,7 @@ export function ToolbarTextBlocks({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent align="start" className="p-1 w-fit grid">
+      <PopoverContent align="start" className="grid w-fit p-1">
         {textBlocks.map((b) => (
           <Button
             key={b.id}

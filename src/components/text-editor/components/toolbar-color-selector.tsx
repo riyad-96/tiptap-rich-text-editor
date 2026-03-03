@@ -79,10 +79,12 @@ export function ToolbarColorSelector({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent align="start" className="p-0 w-fit overflow-hidden">
-        <div className="p-1 py-2 space-y-2.5 min-w-37.5 max-h-62.5 overflow-y-auto">
+      <PopoverContent align="start" className="w-fit overflow-hidden p-0">
+        <div className="max-h-62.5 min-w-37.5 space-y-2.5 overflow-y-auto p-1 py-2">
           <div className="grid gap-1">
-            <span className="text-neutral-700 px-2.5 text-xs">Colors</span>
+            <span className="px-2.5 text-xs text-neutral-700 dark:text-neutral-300">
+              Colors
+            </span>
             <div className="grid">
               {colors.map((c) => (
                 <Button
@@ -92,7 +94,7 @@ export function ToolbarColorSelector({
                     activeTextColor?.color === c.color ? 'secondary' : 'ghost'
                   }
                   className={cn(
-                    'flex items-center justify-start gap-2 px-2.5 h-9',
+                    'flex h-9 items-center justify-start gap-2 px-2.5',
                   )}
                   aria-label={c.text}
                   onClick={() => {
@@ -110,7 +112,7 @@ export function ToolbarColorSelector({
                   disabled={!editorState.canColor}
                 >
                   <span
-                    className="size-6 border rounded-sm grid place-items-center"
+                    className="grid size-6 place-items-center rounded-sm border"
                     style={{ color: c.color }}
                   >
                     A
@@ -122,7 +124,9 @@ export function ToolbarColorSelector({
           </div>
 
           <div className="grid gap-1">
-            <span className="text-neutral-700 px-2.5 text-xs">Highlights</span>
+            <span className="px-2.5 text-xs text-neutral-700 dark:text-neutral-300">
+              Highlights
+            </span>
             <div className="grid">
               {highlights.map((h) => (
                 <Button
@@ -134,7 +138,7 @@ export function ToolbarColorSelector({
                       : 'ghost'
                   }
                   className={cn(
-                    'flex items-center justify-start gap-2 px-2.5 h-9',
+                    'flex h-9 items-center justify-start gap-2 px-2.5',
                   )}
                   aria-label={h.text}
                   onClick={() => {
@@ -156,7 +160,7 @@ export function ToolbarColorSelector({
                   disabled={!editorState.canHighlight}
                 >
                   <span
-                    className="size-6 border rounded-sm grid place-items-center"
+                    className="grid size-6 place-items-center rounded-sm border"
                     style={{ backgroundColor: h.color }}
                   >
                     A
