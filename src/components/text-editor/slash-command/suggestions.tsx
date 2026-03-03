@@ -3,17 +3,6 @@ import { ReactRenderer } from '@tiptap/react';
 import tippy, { Instance } from 'tippy.js';
 import { SuggestionOptions } from '@tiptap/suggestion';
 import {
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Text,
-  List,
-  ListOrdered,
-  CheckSquare,
-  Code,
-  SquareCode,
-  Quote,
   BoldIcon,
   ItalicIcon,
   UnderlineIcon,
@@ -22,6 +11,18 @@ import {
   TextAlignCenterIcon,
   TextAlignEndIcon,
   TextAlignJustifyIcon,
+  Heading5Icon,
+  PilcrowIcon,
+  Heading1Icon,
+  Heading2Icon,
+  Heading3Icon,
+  Heading4Icon,
+  ListIcon,
+  ListOrderedIcon,
+  CheckSquareIcon,
+  CodeIcon,
+  SquareCodeIcon,
+  QuoteIcon,
 } from 'lucide-react';
 import { CommandList, CommandListProps } from './command-list';
 import { SuggestionItem } from '../types/slash-command';
@@ -32,7 +33,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Paragraph',
         description: 'Plain text.',
-        icon: Text,
+        icon: PilcrowIcon,
         search_term: ['paragraph', 'text', 'p', 'body', 'normal'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).setNode('paragraph').run();
@@ -41,7 +42,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Heading 1',
         description: 'Large heading.',
-        icon: Heading1,
+        icon: Heading1Icon,
         search_term: ['heading', 'h1', 'title', 'big', 'header'],
         command: ({ editor, range }) => {
           editor
@@ -55,7 +56,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Heading 2',
         description: 'Medium heading.',
-        icon: Heading2,
+        icon: Heading2Icon,
         search_term: ['heading', 'h2', 'subtitle', 'section'],
         command: ({ editor, range }) => {
           editor
@@ -69,7 +70,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Heading 3',
         description: 'Small heading.',
-        icon: Heading3,
+        icon: Heading3Icon,
         search_term: ['heading', 'h3', 'subsection'],
         command: ({ editor, range }) => {
           editor
@@ -83,7 +84,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Heading 4',
         description: 'Tiny heading.',
-        icon: Heading4,
+        icon: Heading4Icon,
         search_term: ['heading', 'h4', 'small'],
         command: ({ editor, range }) => {
           editor
@@ -95,9 +96,23 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
         },
       },
       {
+        title: 'Heading 5',
+        description: 'Smallest heading.',
+        icon: Heading5Icon,
+        search_term: ['heading', 'h5', 'smallest'],
+        command: ({ editor, range }) => {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .setNode('heading', { level: 6 })
+            .run();
+        },
+      },
+      {
         title: 'Bullet List',
         description: 'Bulleted list.',
-        icon: List,
+        icon: ListIcon,
         search_term: ['bullet', 'ul', 'unordered', 'list', 'points'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleBulletList().run();
@@ -106,7 +121,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Numbered List',
         description: 'Numbered list.',
-        icon: ListOrdered,
+        icon: ListOrderedIcon,
         search_term: ['number', 'ordered', 'ol', 'list', 'steps'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleOrderedList().run();
@@ -115,7 +130,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Task List',
         description: 'Checklist.',
-        icon: CheckSquare,
+        icon: CheckSquareIcon,
         search_term: ['task', 'todo', 'check', 'checkbox', 'checklist', 'list'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleTaskList().run();
@@ -124,7 +139,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Inline Code',
         description: 'Code snippet.',
-        icon: Code,
+        icon: CodeIcon,
         search_term: ['code', 'inline', 'snippet', 'cmd'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).setMark('code').run();
@@ -133,7 +148,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Code Block',
         description: 'Code section.',
-        icon: SquareCode,
+        icon: SquareCodeIcon,
         search_term: ['codeblock', 'code', 'block', 'snippet', 'program'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleCodeBlock().run();
@@ -142,7 +157,7 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       {
         title: 'Blockquote',
         description: 'Quote block.',
-        icon: Quote,
+        icon: QuoteIcon,
         search_term: ['quote', 'blockquote', 'citation', 'say'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleBlockquote().run();

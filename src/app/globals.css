@@ -158,31 +158,39 @@
 }
 
 .tiptap-text-editor.tiptap-text-editor {
+  --root-size: 0.0625rem;
+
   p {
     margin-block: 0.5rem;
     color: var(--primary);
   }
 
   h2 {
-    font-size: 1.8rem;
+    font-size: calc(var(--root-size) * 26);
     font-weight: 700;
     line-height: 1.3;
     margin-block: 1rem 0.8rem;
   }
   h3 {
-    font-size: 1.5rem;
+    font-size: calc(var(--root-size) * 22);
     font-weight: 650;
     line-height: 1.35;
     margin-block: 0.9rem 0.75rem;
   }
   h4 {
-    font-size: 1.25rem;
+    font-size: calc(var(--root-size) * 19);
     font-weight: 600;
     line-height: 1.4;
     margin-block: 0.8rem 0.7rem;
   }
   h5 {
-    font-size: 1.1rem;
+    font-size: calc(var(--root-size) * 16);
+    font-weight: 600;
+    line-height: 1.45;
+    margin-block: 0.7rem 0.65rem;
+  }
+  h6 {
+    font-size: calc(var(--root-size) * 14);
     font-weight: 600;
     line-height: 1.45;
     margin-block: 0.7rem 0.65rem;
@@ -206,6 +214,10 @@
     padding-inline: 0.3rem;
     padding-block: 0.175rem 0.1rem;
     vertical-align: middle;
+  }
+
+  blockquote {
+    font-style: normal;
   }
 
   pre {

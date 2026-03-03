@@ -12,6 +12,7 @@ import {
   Heading2Icon,
   Heading3Icon,
   Heading4Icon,
+  Heading5Icon,
   PilcrowIcon,
   TypeIcon,
 } from 'lucide-react';
@@ -34,6 +35,7 @@ export function ToolbarTextBlocks({
       isH3: ctx.editor.isActive('heading', { level: 3 }),
       isH4: ctx.editor.isActive('heading', { level: 4 }),
       isH5: ctx.editor.isActive('heading', { level: 5 }),
+      isH6: ctx.editor.isActive('heading', { level: 6 }),
     }),
   });
 
@@ -72,6 +74,13 @@ export function ToolbarTextBlocks({
       onClick: () => editor.chain().focus().toggleHeading({ level: 5 }).run(),
       text: 'Heading 4',
       isActive: editorState.isH5,
+    },
+    {
+      id: 6,
+      icon: Heading5Icon,
+      onClick: () => editor.chain().focus().toggleHeading({ level: 6 }).run(),
+      text: 'Heading 6',
+      isActive: editorState.isH6,
     },
   ];
 
