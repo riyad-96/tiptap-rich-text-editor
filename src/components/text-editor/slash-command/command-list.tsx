@@ -63,7 +63,7 @@ export const CommandList = forwardRef((props: CommandListProps, ref) => {
   return (
     <div
       ref={containerRef}
-      className="bg-popover border-border z-50 grid max-h-82.5 w-55 scroll-py-1 overflow-y-auto rounded-md border p-1 shadow-md"
+      className="bg-popover border-border z-50 grid max-h-80.5 w-55 scroll-py-1 overflow-y-auto rounded-md border p-1 shadow-md"
     >
       {props.items.length ? (
         props.items.map((item, index) => (
