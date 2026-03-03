@@ -121,7 +121,11 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--muted-foreground) var(--background);
+}
+.dark {
+  * {
+    scrollbar-color: var(--ring) transparent;
+  }
 }
 
 @layer base {
