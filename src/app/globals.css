@@ -119,15 +119,6 @@
   --editor-selection-bg: oklch(1 0 0 / 0.2);
 }
 
-* {
-  scrollbar-width: thin;
-}
-.dark {
-  * {
-    scrollbar-color: var(--ring) transparent;
-  }
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -137,7 +128,18 @@
   }
 }
 
-/* Tiptap text editor stylings */
+/*==================================
+  Tiptap text editor stylings starts
+==================================*/
+* {
+  scrollbar-width: thin;
+}
+.dark {
+  color-scheme: dark;
+  * {
+    scrollbar-color: var(--ring) transparent;
+  }
+}
 .tiptap-text-editor.tiptap-text-editor {
   --code-bg-clr: oklch(96.2% 0 0);
   --code-border-clr: oklch(90.2% 0 0);
@@ -159,42 +161,6 @@
 
 .tiptap-text-editor.tiptap-text-editor {
   --root-size: 0.0625rem;
-
-  p {
-    margin-block: 0.5rem;
-    color: var(--primary);
-  }
-
-  h2 {
-    font-size: calc(var(--root-size) * 26);
-    font-weight: 700;
-    line-height: 1.3;
-    margin-block: 1rem 0.8rem;
-  }
-  h3 {
-    font-size: calc(var(--root-size) * 22);
-    font-weight: 650;
-    line-height: 1.35;
-    margin-block: 0.9rem 0.75rem;
-  }
-  h4 {
-    font-size: calc(var(--root-size) * 19);
-    font-weight: 600;
-    line-height: 1.4;
-    margin-block: 0.8rem 0.7rem;
-  }
-  h5 {
-    font-size: calc(var(--root-size) * 16);
-    font-weight: 600;
-    line-height: 1.45;
-    margin-block: 0.7rem 0.65rem;
-  }
-  h6 {
-    font-size: calc(var(--root-size) * 14);
-    font-weight: 600;
-    line-height: 1.45;
-    margin-block: 0.7rem 0.65rem;
-  }
 
   *::selection {
     background-color: var(--editor-selection-bg);
@@ -248,7 +214,6 @@
 
   ul[data-type='taskList'] {
     padding: 0;
-    padding-inline-start: 0.225rem;
 
     li {
       display: flex;
@@ -257,7 +222,7 @@
       flex: 1;
     }
     li div p {
-      padding-inline-start: 0.5rem;
+      padding-inline-start: 0.725rem;
       margin: 0;
     }
     li[data-checked='true'] {
@@ -302,3 +267,7 @@ span.suggestion[data-decoration-content]::before {
     cursor: pointer;
   }
 }
+
+/*================================
+  Tiptap text editor stylings ends
+================================*/

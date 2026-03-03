@@ -79,7 +79,7 @@ export function ToolbarTextBlocks({
       id: 6,
       icon: Heading5Icon,
       onClick: () => editor.chain().focus().toggleHeading({ level: 6 }).run(),
-      text: 'Heading 6',
+      text: 'Heading 5',
       isActive: editorState.isH6,
     },
   ];
