@@ -267,6 +267,25 @@ div:has(.tiptap-bubble-menu-inner-element) {
   will-change: left, top;
 }
 
+span.suggestion[data-decoration-content] {
+  display: inline-block;
+  font-weight: 600;
+  width: fit-content;
+  isolation: isolate;
+  position: relative;
+}
+
+span.suggestion[data-decoration-content]::before {
+  content: '';
+  position: absolute;
+  /* inset: 0 -4px 0 -4px; */
+  inset-inline: -8px;
+  inset-block: 0;
+  border-radius: 0.525rem;
+  z-index: -1;
+  background-color: var(--secondary);
+}
+
 @media (pointer: fine) {
   button {
     cursor: pointer;
