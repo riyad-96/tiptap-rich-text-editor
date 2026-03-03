@@ -63,14 +63,14 @@ export const CommandList = forwardRef((props: CommandListProps, ref) => {
   return (
     <div
       ref={containerRef}
-      className="bg-popover border-border z-50 grid max-h-82.5 w-60 scroll-py-1 overflow-y-auto rounded-md border p-1 shadow-md"
+      className="bg-popover border-border z-50 grid max-h-82.5 w-55 scroll-py-1 overflow-y-auto rounded-md border p-1 shadow-md"
     >
       {props.items.length ? (
         props.items.map((item, index) => (
           <Button
             key={index}
             onClick={() => selectItem(index)}
-            className={`flex h-fit items-center justify-start gap-2 rounded-md px-2 text-start`}
+            className="flex h-fit items-center justify-start gap-2 rounded-md px-2 text-start transition-none"
             variant={index === selectedIndex ? 'secondary' : 'ghost'}
           >
             <span className="flex size-9 shrink-0 items-center justify-center rounded-md border">

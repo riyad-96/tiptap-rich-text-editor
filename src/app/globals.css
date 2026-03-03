@@ -278,8 +278,7 @@ span.suggestion[data-decoration-content] {
 span.suggestion[data-decoration-content]::before {
   content: '';
   position: absolute;
-  /* inset: 0 -4px 0 -4px; */
-  inset-inline: -8px;
+  inset-inline: -4px;
   inset-block: 0;
   border-radius: 0.525rem;
   z-index: -1;

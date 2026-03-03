@@ -14,6 +14,14 @@ import {
   Code,
   SquareCode,
   Quote,
+  BoldIcon,
+  ItalicIcon,
+  UnderlineIcon,
+  StrikethroughIcon,
+  TextAlignStartIcon,
+  TextAlignCenterIcon,
+  TextAlignEndIcon,
+  TextAlignJustifyIcon,
 } from 'lucide-react';
 import { CommandList, CommandListProps } from './command-list';
 import { SuggestionItem } from '../types/slash-command';
@@ -23,18 +31,18 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
     const items: SuggestionItem[] = [
       {
         title: 'Paragraph',
-        description: 'Just start typing with plain text.',
+        description: 'Plain text.',
         icon: Text,
-        search_term: ['paragraph', 'text', 'p'],
+        search_term: ['paragraph', 'text', 'p', 'body', 'normal'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).setNode('paragraph').run();
         },
       },
       {
         title: 'Heading 1',
-        description: 'Big section heading.',
+        description: 'Large heading.',
         icon: Heading1,
-        search_term: ['heading 1', 'h1', 'big heading'],
+        search_term: ['heading', 'h1', 'title', 'big', 'header'],
         command: ({ editor, range }) => {
           editor
             .chain()
@@ -46,9 +54,9 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       },
       {
         title: 'Heading 2',
-        description: 'Medium section heading.',
+        description: 'Medium heading.',
         icon: Heading2,
-        search_term: ['heading 2', 'h2', 'medium heading'],
+        search_term: ['heading', 'h2', 'subtitle', 'section'],
         command: ({ editor, range }) => {
           editor
             .chain()
@@ -60,9 +68,9 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       },
       {
         title: 'Heading 3',
-        description: 'Small section heading.',
+        description: 'Small heading.',
         icon: Heading3,
-        search_term: ['heading 3', 'h3', 'small heading'],
+        search_term: ['heading', 'h3', 'subsection'],
         command: ({ editor, range }) => {
           editor
             .chain()
@@ -74,9 +82,9 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       },
       {
         title: 'Heading 4',
-        description: 'Ultra small section heading.',
+        description: 'Tiny heading.',
         icon: Heading4,
-        search_term: ['heading 4', 'h4', 'tiny heading'],
+        search_term: ['heading', 'h4', 'small'],
         command: ({ editor, range }) => {
           editor
             .chain()
@@ -88,73 +96,157 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
       },
       {
         title: 'Bullet List',
-        description: 'Create a simple bulleted list.',
+        description: 'Bulleted list.',
         icon: List,
-        search_term: ['bullet', 'unordered list', 'list'],
+        search_term: ['bullet', 'ul', 'unordered', 'list', 'points'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleBulletList().run();
         },
       },
       {
         title: 'Numbered List',
-        description: 'Create a list with numbering.',
+        description: 'Numbered list.',
         icon: ListOrdered,
-        search_term: ['numbered', 'ordered list', 'list'],
+        search_term: ['number', 'ordered', 'ol', 'list', 'steps'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleOrderedList().run();
         },
       },
       {
         title: 'Task List',
-        description: 'Track tasks with a checklist.',
+        description: 'Checklist.',
         icon: CheckSquare,
-        search_term: ['task', 'checklist', 'todo', 'list'],
+        search_term: ['task', 'todo', 'check', 'checkbox', 'checklist', 'list'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleTaskList().run();
         },
       },
       {
         title: 'Inline Code',
-        description: 'Add a small snippet of code.',
+        description: 'Code snippet.',
         icon: Code,
-        search_term: ['inline code', 'code', 'snippet'],
+        search_term: ['code', 'inline', 'snippet', 'cmd'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).setMark('code').run();
         },
       },
       {
         title: 'Code Block',
-        description: 'Add a block of code.',
+        description: 'Code section.',
         icon: SquareCode,
-        search_term: [
-          'code block',
-          'block code',
-          'snippet block',
-          'block',
-          'code',
-        ],
+        search_term: ['codeblock', 'code', 'block', 'snippet', 'program'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleCodeBlock().run();
         },
       },
       {
         title: 'Blockquote',
-        description: 'Capture a quote.',
+        description: 'Quote block.',
         icon: Quote,
-        search_term: ['blockquote', 'quote', 'citation'],
+        search_term: ['quote', 'blockquote', 'citation', 'say'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleBlockquote().run();
         },
       },
+      {
+        title: 'Bold',
+        description: 'Bold text.',
+        icon: BoldIcon,
+        search_term: ['bold', 'b', 'strong'],
+        command: ({ editor, range }) => {
+          editor.chain().focus().deleteRange(range).toggleBold().run();
+        },
+      },
+      {
+        title: 'Italic',
+        description: 'Italic text.',
+        icon: ItalicIcon,
+        search_term: ['italic', 'i', 'emphasis'],
+        command: ({ editor, range }) => {
+          editor.chain().focus().deleteRange(range).toggleItalic().run();
+        },
+      },
+      {
+        title: 'Underline',
+        description: 'Underline text.',
+        icon: UnderlineIcon,
+        search_term: ['underline', 'u', 'line'],
+        command: ({ editor, range }) => {
+          editor.chain().focus().deleteRange(range).toggleUnderline().run();
+        },
+      },
+      {
+        title: 'Strike',
+        description: 'Strikethrough.',
+        icon: StrikethroughIcon,
+        search_term: ['strike', 'strikethrough', 'delete', 'remove'],
+        command: ({ editor, range }) => {
+          editor.chain().focus().deleteRange(range).toggleStrike().run();
+        },
+      },
+      {
+        title: 'Align start',
+        description: 'Align left.',
+        icon: TextAlignStartIcon,
+        search_term: ['align', 'left', 'start'],
+        command: ({ editor, range }) => {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .toggleTextAlign('left')
+            .run();
+        },
+      },
+      {
+        title: 'Align center',
+        description: 'Align center.',
+        icon: TextAlignCenterIcon,
+        search_term: ['align', 'center', 'middle'],
+        command: ({ editor, range }) => {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .toggleTextAlign('center')
+            .run();
+        },
+      },
+      {
+        title: 'Align end',
+        description: 'Align right.',
+        icon: TextAlignEndIcon,
+        search_term: ['align', 'right', 'end'],
+        command: ({ editor, range }) => {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .toggleTextAlign('right')
+            .run();
+        },
+      },
+      {
+        title: 'Align justify',
+        description: 'Justify text.',
+        icon: TextAlignJustifyIcon,
+        search_term: ['align', 'justify', 'spread'],
+        command: ({ editor, range }) => {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .toggleTextAlign('justify')
+            .run();
+        },
+      },
     ];
 
-    return items
-      .filter((item) =>
-        item.search_term.some((term) =>
-          term.toLowerCase().includes(query.toLowerCase()),
-        ),
-      )
-      .slice(0, 10);
+    return items.filter((item) =>
+      item.search_term.some((term) =>
+        term.toLowerCase().includes(query.toLowerCase()),
+      ),
+    );
   },
 
   render: () => {
