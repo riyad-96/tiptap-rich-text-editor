@@ -51,7 +51,7 @@ export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
     editorProps: {
       attributes: {
         class:
-          'tiptap-text-editor prose max-sm:prose-sm focus:outline-none bg-background min-h-75 max-w-none w-full px-8 py-6',
+          'tiptap-text-editor prose dark:prose-invert max-sm:prose-sm focus:outline-none bg-background min-h-75 max-w-none w-full px-8 py-6',
       },
     },
     content,
@@ -76,7 +76,7 @@ export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
     <TooltipProvider>
       <EditorContent
         editor={editor}
-        className="border rounded-md overflow-hidden"
+        className="border rounded-md overflow-hidden text-primary"
       >
         {editor && (
           <>

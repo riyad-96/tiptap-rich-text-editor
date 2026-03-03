@@ -1,47 +1,25 @@
-import { Toggle } from '@/components/ui';
+import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
 import type { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import { BubbleMenu as TiptapBubbleMenu } from '@tiptap/react/menus';
-import {
-  BoldIcon,
-  CodeSquareIcon,
-  CodeXmlIcon,
-  ItalicIcon,
-  LinkIcon,
-  StrikethroughIcon,
-  TextQuoteIcon,
-  UnderlineIcon,
-  UnlinkIcon,
-} from 'lucide-react';
+
+import { Toggle } from '@/components/ui';
+
 import { ToolbarSeparator } from './toolbar-separator';
-import { ToolbarHeadings } from './toolbar-headings';
+import { ToolbarTextBlocks } from './toolbar-text-blocks';
 import { ToolbarLists } from './toolbar-lists';
 import { ToolbarColorSelector } from './toolbar-color-selector';
 import { ToolbarLink } from './toolbar-link';
+import { ToolbarBasicTools } from './toolbar-basic-tools';
 
 export function BubbleMenu({ editor }: { editor: Editor }) {
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
       return {
-        isBold: ctx.editor.isActive('bold'),
-        isItalic: ctx.editor.isActive('italic'),
-        iamThapa: ctx.editor.isActive('underline'),
-        isStrike: ctx.editor.isActive('strike'),
-        isCode: ctx.editor.isActive('code'),
         isCodeBlock: ctx.editor.isActive('codeBlock'),
-        isHighlight: ctx.editor.isActive('highlight'),
-        isBulletList: ctx.editor.isActive('bulletList'),
-        isOrderedList: ctx.editor.isActive('orderedList'),
-        isTaskList: ctx.editor.isActive('taskList'),
-        isBlockquote: ctx.editor.isActive('blockquote'),
-        isLink: ctx.editor.isActive('link'),
-        isH2: ctx.editor.isActive('heading', { level: 2 }),
-        isH3: ctx.editor.isActive('heading', { level: 3 }),
-        isH4: ctx.editor.isActive('heading', { level: 4 }),
-        isH5: ctx.editor.isActive('heading', { level: 5 }),
-        isH6: ctx.editor.isActive('heading', { level: 6 }),
-        isP: ctx.editor.isActive('paragraph'),
+        isBlockQuote: ctx.editor.isActive('blockquote'),
+        canBlockQuote: ctx.editor.can().toggleBlockquote(),
       };
     },
   });
@@ -50,79 +28,41 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
     <TiptapBubbleMenu
       editor={editor}
       className={
-        'tiptap-bubble-menu-inner-element flex flex-wrap items-center gap-1 bg-white shadow-lg rounded-md border p-1'
+        'tiptap-bubble-menu-inner-element flex flex-wrap items-center gap-1 bg-background shadow-lg rounded-md border p-1'
       }
       updateDelay={80}
     >
-      <ToolbarHeadings editor={editor} />
+      <ToolbarTextBlocks editor={editor} />
       <ToolbarLists editor={editor} />
+
       <Toggle
         size="sm"
-        pressed={editorState.isBlockquote}
+        pressed={editorState.isBlockQuote}
         onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
         aria-label="Toggle blockquote"
+        disabled={!editorState.canBlockQuote}
       >
         <TextQuoteIcon className="size-4" />
       </Toggle>
+
       <Toggle
         size="sm"
         pressed={editorState.isCodeBlock}
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
-        aria-label="Toggle code"
+        aria-label="Toggle code block"
       >
         <CodeSquareIcon className="size-4" />
       </Toggle>
 
       <ToolbarSeparator />
 
-      <Toggle
-        size="sm"
-        pressed={editorState.isBold}
-        onPressedChange={() => editor.chain().focus().toggleBold().run()}
-        aria-label="Toggle bold"
-      >
-        <BoldIcon className="size-4" />
-      </Toggle>
+      <ToolbarBasicTools editor={editor} />
 
-      <Toggle
-        size="sm"
-        pressed={editorState.isItalic}
-        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-        aria-label="Toggle bold"
-      >
-        <ItalicIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.iamThapa}
-        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-        aria-label="Toggle underline"
-      >
-        <UnderlineIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.isStrike}
-        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-        aria-label="Toggle strikethrough"
-      >
-        <StrikethroughIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.isCode}
-        onPressedChange={() => editor.chain().focus().toggleCode().run()}
-        aria-label="Toggle code"
-      >
-        <CodeXmlIcon className="size-4" />
-      </Toggle>
+      <ToolbarSeparator />
 
       <ToolbarColorSelector editor={editor} />
 
-      <div className="bg-border mx-1 h-6 w-px" />
+      <ToolbarSeparator />
 
       <ToolbarLink editor={editor} />
     </TiptapBubbleMenu>

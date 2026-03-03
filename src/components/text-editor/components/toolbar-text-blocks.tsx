@@ -12,18 +12,24 @@ import {
   Heading2Icon,
   Heading3Icon,
   Heading4Icon,
-  HeadingIcon,
+  PilcrowIcon,
+  TypeIcon,
 } from 'lucide-react';
 import { useState } from 'react';
 
-type Level = 1 | 2 | 3 | 4 | 5 | 6;
-
-export function ToolbarHeadings({ editor }: { editor: Editor }) {
+export function ToolbarTextBlocks({
+  editor,
+  modal = false,
+}: {
+  editor: Editor;
+  modal?: boolean;
+}) {
   const [open, setOpen] = useState(false);
 
   const editorState = useEditorState({
     editor,
     selector: (ctx) => ({
+      isP: ctx.editor.isActive('paragraph'),
       isH2: ctx.editor.isActive('heading', { level: 2 }),
       isH3: ctx.editor.isActive('heading', { level: 3 }),
       isH4: ctx.editor.isActive('heading', { level: 4 }),
@@ -31,7 +37,14 @@ export function ToolbarHeadings({ editor }: { editor: Editor }) {
     }),
   });
 
-  const headings = [
+  const textBlocks = [
+    {
+      id: 1,
+      icon: PilcrowIcon,
+      onClick: () => editor.chain().focus().setParagraph().run(),
+      text: 'Paragraph',
+      isActive: editorState.isP,
+    },
     {
       id: 2,
       icon: Heading1Icon,
@@ -62,23 +75,23 @@ export function ToolbarHeadings({ editor }: { editor: Editor }) {
     },
   ];
 
-  const activeHeading = headings.find((h) => h.isActive);
+  const activeBlock = textBlocks.find((b) => b.isActive);
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover open={open} onOpenChange={setOpen} modal={modal}>
       <PopoverTrigger asChild>
         <Button
-          variant={activeHeading ? 'secondary' : 'ghost'}
+          variant={activeBlock ? 'secondary' : 'ghost'}
           size="sm"
           className={cn('flex items-center gap-0.5 pe-1!')}
         >
           <span>
-            {activeHeading ? (
+            {activeBlock ? (
               <>
-                <activeHeading.icon />
+                <activeBlock.icon />
               </>
             ) : (
-              <HeadingIcon />
+              <TypeIcon />
             )}
           </span>
 
@@ -87,27 +100,20 @@ export function ToolbarHeadings({ editor }: { editor: Editor }) {
       </PopoverTrigger>
 
       <PopoverContent align="start" className="p-1 w-fit grid">
-        {headings.map((h) => (
+        {textBlocks.map((b) => (
           <Button
-            key={h.id}
+            key={b.id}
             onClick={() => {
               setOpen(false);
-              editor
-                .chain()
-                .focus()
-                .toggleHeading({ level: h.id as Level })
-                .run();
+              b.onClick();
             }}
-            variant="ghost"
+            variant={activeBlock?.id === b.id ? 'secondary' : 'ghost'}
             size="sm"
-            className={cn(
-              'flex justify-start',
-              activeHeading?.id === h.id && 'bg-neutral-100',
-            )}
-            aria-label={h.text}
+            className={cn('flex justify-start')}
+            aria-label={b.text}
           >
-            <span>{<h.icon />}</span>
-            <span>{h.text}</span>
+            <span>{<b.icon />}</span>
+            <span>{b.text}</span>
           </Button>
         ))}
       </PopoverContent>

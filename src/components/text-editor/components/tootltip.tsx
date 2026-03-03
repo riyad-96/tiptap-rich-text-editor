@@ -7,12 +7,15 @@ import {
 type TooltipProps = {
   children: React.ReactNode;
   content: React.ReactNode;
+  disabled?: boolean;
 };
 
-export function Tooltip({ children, content }: TooltipProps) {
+export function Tooltip({ children, content, disabled }: TooltipProps) {
   return (
     <ShadcnTooltip>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipTrigger asChild disabled={disabled}>
+        {children}
+      </TooltipTrigger>
 
       <TooltipContent side={'bottom'}>{content}</TooltipContent>
     </ShadcnTooltip>

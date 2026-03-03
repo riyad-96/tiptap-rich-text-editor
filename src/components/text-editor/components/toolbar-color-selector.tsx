@@ -10,7 +10,13 @@ import { useEditorState } from '@tiptap/react';
 import { ChevronDownIcon, PaletteIcon } from 'lucide-react';
 import { useState } from 'react';
 
-export function ToolbarColorSelector({ editor }: { editor: Editor }) {
+export function ToolbarColorSelector({
+  editor,
+  modal = false,
+}: {
+  editor: Editor;
+  modal?: boolean;
+}) {
   const [open, setOpen] = useState(false);
 
   const editorState = useEditorState({
@@ -18,6 +24,12 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
     selector: (ctx) => ({
       textColor: ctx.editor.getAttributes('textStyle').color,
       highlightColor: ctx.editor.getAttributes('highlight').color,
+      canColor: ctx.editor.can().chain().setColor('#fff').run(),
+      canHighlight: ctx.editor
+        .can()
+        .chain()
+        .setHighlight({ color: '#fff' })
+        .run(),
     }),
   });
 
@@ -35,15 +47,15 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
   ];
   const highlights = [
     { id: 1, color: '', text: 'Default' },
-    { id: 2, color: '#e5e7eb', text: 'Gray' },
-    { id: 3, color: '#fee2e2', text: 'Red' },
-    { id: 4, color: '#ffedd5', text: 'Orange' },
-    { id: 5, color: '#fef9c3', text: 'Yellow' },
-    { id: 6, color: '#dcfce7', text: 'Green' },
-    { id: 7, color: '#cffafe', text: 'Cyan' },
-    { id: 8, color: '#dbeafe', text: 'Blue' },
-    { id: 9, color: '#ede9fe', text: 'Purple' },
-    { id: 10, color: '#fce7f3', text: 'Pink' },
+    { id: 2, color: 'rgba(107,114,128,0.18)', text: 'Gray' },
+    { id: 3, color: 'rgba(239,68,68,0.18)', text: 'Red' },
+    { id: 4, color: 'rgba(249,115,22,0.18)', text: 'Orange' },
+    { id: 5, color: 'rgba(234,179,8,0.20)', text: 'Yellow' },
+    { id: 6, color: 'rgba(34,197,94,0.18)', text: 'Green' },
+    { id: 7, color: 'rgba(6,182,212,0.18)', text: 'Cyan' },
+    { id: 8, color: 'rgba(59,130,246,0.18)', text: 'Blue' },
+    { id: 9, color: 'rgba(139,92,246,0.18)', text: 'Purple' },
+    { id: 10, color: 'rgba(236,72,153,0.18)', text: 'Pink' },
   ];
 
   const activeTextColor = colors.find((c) => c.color === editorState.textColor);
@@ -52,10 +64,11 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
   );
 
   const isColorActive = activeTextColor || activeHighlightColor;
+  const canColorOrHighlight = editorState.canColor && editorState.canHighlight;
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
-      <PopoverTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen} modal={modal}>
+      <PopoverTrigger asChild disabled={!canColorOrHighlight}>
         <Button
           variant={isColorActive ? 'secondary' : 'ghost'}
           size="sm"
@@ -75,10 +88,11 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
                 <Button
                   key={c.id}
                   size="sm"
-                  variant="ghost"
+                  variant={
+                    activeTextColor?.color === c.color ? 'secondary' : 'ghost'
+                  }
                   className={cn(
                     'flex items-center justify-start gap-2 px-2.5 h-9',
-                    activeTextColor?.color === c.color && 'bg-neutral-100',
                   )}
                   aria-label={c.text}
                   onClick={() => {
@@ -93,6 +107,7 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
                     }
                     setOpen(false);
                   }}
+                  disabled={!editorState.canColor}
                 >
                   <span
                     className="size-6 border rounded-sm grid place-items-center"
@@ -113,10 +128,13 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
                 <Button
                   key={h.id}
                   size="sm"
-                  variant="ghost"
+                  variant={
+                    activeHighlightColor?.color === h.color
+                      ? 'secondary'
+                      : 'ghost'
+                  }
                   className={cn(
                     'flex items-center justify-start gap-2 px-2.5 h-9',
-                    activeHighlightColor?.color === h.color && 'bg-neutral-100',
                   )}
                   aria-label={h.text}
                   onClick={() => {
@@ -135,6 +153,7 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
                     }
                     setOpen(false);
                   }}
+                  disabled={!editorState.canHighlight}
                 >
                   <span
                     className="size-6 border rounded-sm grid place-items-center"

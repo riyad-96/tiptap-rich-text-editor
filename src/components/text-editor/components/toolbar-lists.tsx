@@ -15,7 +15,13 @@ import {
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
-export function ToolbarLists({ editor }: { editor: Editor }) {
+export function ToolbarLists({
+  editor,
+  modal = false,
+}: {
+  editor: Editor;
+  modal?: boolean;
+}) {
   const [open, setOpen] = useState(false);
 
   const editorState = useEditorState({
@@ -54,7 +60,7 @@ export function ToolbarLists({ editor }: { editor: Editor }) {
   const activeList = lists.find((h) => h.isActive);
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover open={open} onOpenChange={setOpen} modal={modal}>
       <PopoverTrigger asChild>
         <Button
           variant={activeList ? 'secondary' : 'ghost'}
@@ -83,12 +89,9 @@ export function ToolbarLists({ editor }: { editor: Editor }) {
               l.onClick();
               setOpen(false);
             }}
-            variant="ghost"
+            variant={activeList?.id === l.id ? 'secondary' : 'ghost'}
             size="sm"
-            className={cn(
-              'flex justify-start',
-              activeList?.id === l.id && 'bg-neutral-100',
-            )}
+            className={cn('flex justify-start')}
             aria-label={l.text}
           >
             <span>{<l.icon />}</span>

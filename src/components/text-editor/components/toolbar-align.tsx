@@ -1,5 +1,4 @@
 import { Toggle } from '@/components/ui';
-import { Button } from '@/components/ui/button';
 import type { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import {
@@ -17,6 +16,10 @@ export function ToolbarAlign({ editor }: { editor: Editor }) {
       isCenter: ctx.editor.isActive({ textAlign: 'center' }),
       isRight: ctx.editor.isActive({ textAlign: 'right' }),
       isJustify: ctx.editor.isActive({ textAlign: 'justify' }),
+      canLeft: ctx.editor.can().setTextAlign('left'),
+      canCenter: ctx.editor.can().setTextAlign('center'),
+      canRight: ctx.editor.can().setTextAlign('right'),
+      canJustify: ctx.editor.can().setTextAlign('justify'),
     }),
   });
 
@@ -26,24 +29,28 @@ export function ToolbarAlign({ editor }: { editor: Editor }) {
       align: 'left',
       isActive: editorState.isLeft,
       icon: TextAlignStartIcon,
+      can: editorState.canLeft,
     },
     {
       id: 2,
       align: 'center',
       isActive: editorState.isCenter,
       icon: TextAlignCenterIcon,
+      can: editorState.canCenter,
     },
     {
       id: 3,
       align: 'right',
       isActive: editorState.isRight,
       icon: TextAlignEndIcon,
+      can: editorState.canRight,
     },
     {
       id: 4,
       align: 'justify',
       isActive: editorState.isJustify,
       icon: TextAlignJustifyIcon,
+      can: editorState.canJustify,
     },
   ];
 
@@ -57,6 +64,7 @@ export function ToolbarAlign({ editor }: { editor: Editor }) {
           onPressedChange={() =>
             editor.chain().focus().toggleTextAlign(a.align).run()
           }
+          disabled={!a.can}
         >
           <a.icon />
         </Toggle>

@@ -1,6 +1,4 @@
-import { Toggle } from '@/components/ui';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
@@ -19,7 +17,13 @@ import { useRef, useState } from 'react';
 import { ToolbarSeparator } from './toolbar-separator';
 import { Tooltip } from './tootltip';
 
-export function ToolbarLink({ editor }: { editor: Editor }) {
+export function ToolbarLink({
+  editor,
+  modal = false,
+}: {
+  editor: Editor;
+  modal?: boolean;
+}) {
   const [linkUrl, setLinkUrl] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +31,7 @@ export function ToolbarLink({ editor }: { editor: Editor }) {
     editor,
     selector: (ctx) => ({
       isLink: ctx.editor.isActive('link'),
+      canLink: ctx.editor.can().setLink({ href: 'https://example.com' }),
     }),
   });
 
@@ -50,7 +55,7 @@ export function ToolbarLink({ editor }: { editor: Editor }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <Popover modal open={isOpen} onOpenChange={setIsOpen}>
+    <Popover open={isOpen} onOpenChange={setIsOpen} modal={modal}>
       {editorState.isLink ? (
         <Tooltip content={'Unlink'}>
           <Button
@@ -65,7 +70,7 @@ export function ToolbarLink({ editor }: { editor: Editor }) {
           </Button>
         </Tooltip>
       ) : (
-        <Tooltip content={'Link'}>
+        <Tooltip content={'Link'} disabled={!editorState.canLink}>
           <PopoverTrigger asChild>
             <Button variant="ghost" size="sm" aria-label="Link">
               <LinkIcon />

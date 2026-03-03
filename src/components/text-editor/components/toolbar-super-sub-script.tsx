@@ -9,6 +9,8 @@ export function ToolbarSupSubscript({ editor }: { editor: Editor }) {
     selector: (ctx) => ({
       isSup: ctx.editor.isActive('superscript'),
       isSub: ctx.editor.isActive('subscript'),
+      canSup: ctx.editor.can().toggleSuperscript(),
+      canSub: ctx.editor.can().toggleSubscript(),
     }),
   });
 
@@ -18,6 +20,7 @@ export function ToolbarSupSubscript({ editor }: { editor: Editor }) {
         size="sm"
         pressed={editorState.isSup}
         onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
+        disabled={!editorState.canSup}
       >
         <SuperscriptIcon />
       </Toggle>
@@ -26,6 +29,7 @@ export function ToolbarSupSubscript({ editor }: { editor: Editor }) {
         size="sm"
         pressed={editorState.isSub}
         onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
+        disabled={!editorState.canSub}
       >
         <SubscriptIcon />
       </Toggle>
