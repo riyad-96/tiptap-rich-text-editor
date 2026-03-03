@@ -54,15 +54,12 @@ export function ToolbarColorSelector({ editor }: { editor: Editor }) {
   const isColorActive = activeTextColor || activeHighlightColor;
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
         <Button
-          variant="ghost"
+          variant={isColorActive ? 'secondary' : 'ghost'}
           size="sm"
-          className={cn(
-            'flex items-center gap-0.5 pe-1!',
-            isColorActive && 'bg-neutral-100',
-          )}
+          className={cn('flex items-center gap-0.5 pe-1!')}
         >
           <PaletteIcon />
           <ChevronDownIcon className="size-2.5" />

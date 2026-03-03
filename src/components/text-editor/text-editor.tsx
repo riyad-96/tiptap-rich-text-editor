@@ -2,7 +2,7 @@
 
 import { useEditor, EditorContent, type Content, Editor } from '@tiptap/react';
 import { ToolBar } from './components/toolbar';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BubbleMenu } from './components/bubble-menu';
 
 // extensions
@@ -14,6 +14,7 @@ import { TextAlign } from '@tiptap/extension-text-align';
 import { Superscript } from '@tiptap/extension-superscript';
 import { Subscript } from '@tiptap/extension-subscript';
 import { type Transaction } from '@tiptap/pm/state';
+import { TooltipProvider } from '../ui/tooltip';
 
 export type SetState<T> = (value: T | ((prev: T) => T)) => void;
 
@@ -72,17 +73,19 @@ export function TextEditor({ hideOnTouch = true, onChange }: TextEditorProps) {
   }, [hideOnTouch]);
 
   return (
-    <EditorContent
-      editor={editor}
-      className="border rounded-md overflow-hidden"
-    >
-      {editor && (
-        <>
-          <ToolBar editor={editor} />
-          {!isTouchDevice && <BubbleMenu editor={editor} />}
-          {/* <FloatingMenu editor={editor} /> */}
-        </>
-      )}
-    </EditorContent>
+    <TooltipProvider>
+      <EditorContent
+        editor={editor}
+        className="border rounded-md overflow-hidden"
+      >
+        {editor && (
+          <>
+            <ToolBar editor={editor} />
+            {!isTouchDevice && <BubbleMenu editor={editor} />}
+            {/* <FloatingMenu editor={editor} /> */}
+          </>
+        )}
+      </EditorContent>
+    </TooltipProvider>
   );
 }

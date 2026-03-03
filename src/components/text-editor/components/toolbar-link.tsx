@@ -8,18 +8,32 @@ import {
 } from '@/components/ui/popover';
 import { type Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
-import { LinkIcon, UnlinkIcon } from 'lucide-react';
-import { useState } from 'react';
+import {
+  CornerDownLeftIcon,
+  ExternalLinkIcon,
+  LinkIcon,
+  TrashIcon,
+  UnlinkIcon,
+} from 'lucide-react';
+import { useRef, useState } from 'react';
+import { ToolbarSeparator } from './toolbar-separator';
+import { Tooltip } from './tootltip';
 
 export function ToolbarLink({ editor }: { editor: Editor }) {
+  const [linkUrl, setLinkUrl] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => ({
       isLink: ctx.editor.isActive('link'),
     }),
   });
-  const [linkUrl, setLinkUrl] = useState('');
-  const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
+
+  const closePopup = () => {
+    setIsOpen(false);
+    setLinkUrl('');
+  };
 
   const handleSetLink = () => {
     if (linkUrl) {
@@ -29,38 +43,41 @@ export function ToolbarLink({ editor }: { editor: Editor }) {
         .extendMarkRange('link')
         .setLink({ href: linkUrl })
         .run();
-    } else {
-      editor.chain().focus().extendMarkRange('link').unsetLink().run();
     }
-    setIsLinkPopoverOpen(false);
-    setLinkUrl('');
+    closePopup();
   };
 
-  return (
-    <Popover open={isLinkPopoverOpen} onOpenChange={setIsLinkPopoverOpen}>
-      <PopoverTrigger asChild>
-        {editorState.isLink ? (
-          <Toggle
-            size="sm"
-            aria-label="Toggle link"
-            pressed
-            onPressedChange={() =>
-              editor.chain().focus().extendMarkRange('link').unsetLink().run()
-            }
-          >
-            <UnlinkIcon className="size-4" />
-          </Toggle>
-        ) : (
-          <Button size="sm" variant="ghost" aria-label="Toggle link">
-            <LinkIcon className="size-4" />
-          </Button>
-        )}
-      </PopoverTrigger>
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-      <PopoverContent className="w-80 p-4">
-        <div className="flex flex-col gap-4">
-          <h3 className="font-medium">Insert Link</h3>
-          <Input
+  return (
+    <Popover modal open={isOpen} onOpenChange={setIsOpen}>
+      {editorState.isLink ? (
+        <Tooltip content={'Unlink'}>
+          <Button
+            variant="secondary"
+            size="sm"
+            aria-label="Unlink"
+            onClick={() => {
+              editor.chain().focus().extendMarkRange('link').unsetLink().run();
+            }}
+          >
+            <UnlinkIcon />
+          </Button>
+        </Tooltip>
+      ) : (
+        <Tooltip content={'Link'}>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size="sm" aria-label="Link">
+              <LinkIcon />
+            </Button>
+          </PopoverTrigger>
+        </Tooltip>
+      )}
+
+      <PopoverContent className="w-fit p-1">
+        <div className="flex items-center gap-1">
+          <input
+            ref={inputRef}
             placeholder="https://example.com"
             type="url"
             value={linkUrl}
@@ -70,17 +87,44 @@ export function ToolbarLink({ editor }: { editor: Editor }) {
                 handleSetLink();
               }
             }}
+            className="outline-none py-1.5 px-4 text-sm"
           />
-          <div className="flex justify-between">
+
+          <div className="flex gap-1 items-center">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={() => setIsLinkPopoverOpen(false)}
+              onClick={handleSetLink}
+              disabled={!linkUrl}
             >
-              Cancel
+              <CornerDownLeftIcon />
             </Button>
-            <Button size="sm" onClick={handleSetLink}>
-              Save
+
+            <ToolbarSeparator />
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                window.open(linkUrl, '_blank');
+              }}
+              disabled={!linkUrl}
+            >
+              <ExternalLinkIcon />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setLinkUrl('');
+                if (inputRef.current) {
+                  inputRef.current.focus();
+                }
+              }}
+              disabled={!linkUrl}
+            >
+              <TrashIcon />
             </Button>
           </div>
         </div>

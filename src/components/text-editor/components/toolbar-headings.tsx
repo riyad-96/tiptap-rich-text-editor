@@ -65,15 +65,12 @@ export function ToolbarHeadings({ editor }: { editor: Editor }) {
   const activeHeading = headings.find((h) => h.isActive);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
         <Button
-          variant="ghost"
+          variant={activeHeading ? 'secondary' : 'ghost'}
           size="sm"
-          className={cn(
-            'flex items-center gap-0.5 pe-1!',
-            activeHeading && 'bg-neutral-100',
-          )}
+          className={cn('flex items-center gap-0.5 pe-1!')}
         >
           <span>
             {activeHeading ? (

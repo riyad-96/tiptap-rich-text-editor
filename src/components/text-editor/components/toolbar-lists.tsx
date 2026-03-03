@@ -54,15 +54,12 @@ export function ToolbarLists({ editor }: { editor: Editor }) {
   const activeList = lists.find((h) => h.isActive);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
         <Button
-          variant="ghost"
+          variant={activeList ? 'secondary' : 'ghost'}
           size="sm"
-          className={cn(
-            'flex items-center gap-0.5 pe-1!',
-            activeList && 'bg-neutral-100',
-          )}
+          className={cn('flex items-center gap-0.5 pe-1!')}
         >
           <span>
             {activeList ? (
