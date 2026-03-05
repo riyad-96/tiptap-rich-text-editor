@@ -1,7 +1,7 @@
 import { useEditorState } from '@tiptap/react';
 import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
 
-import { Toggle } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 
 import { ToolbarLink } from './toolbar-link';
 import { ToolbarTextBlocks } from './toolbar-text-blocks';
@@ -14,7 +14,6 @@ import { ToolbarSupSubscript } from './toolbar-super-sub-script';
 import { ToolbarBasicTools } from './toolbar-basic-tools';
 import { useEditorProvider } from '../hooks/use-editor-provider';
 import { Tooltip } from './tooltip';
-import { Button } from '@/components/ui/button';
 
 export function ToolBar() {
   const { editor } = useEditorProvider();

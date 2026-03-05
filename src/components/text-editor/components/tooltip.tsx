@@ -3,6 +3,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+
 import { useEditorProvider } from '../hooks/use-editor-provider';
 
 type TooltipProps = {

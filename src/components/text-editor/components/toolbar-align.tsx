@@ -6,10 +6,10 @@ import {
   TextAlignStartIcon,
 } from 'lucide-react';
 
-import { Tooltip } from './tooltip';
-
-import { useEditorProvider } from '../hooks/use-editor-provider';
 import { Button } from '@/components/ui/button';
+
+import { Tooltip } from './tooltip';
+import { useEditorProvider } from '../hooks/use-editor-provider';
 
 export function ToolbarAlign() {
   const { editor } = useEditorProvider();
