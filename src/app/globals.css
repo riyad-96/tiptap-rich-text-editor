@@ -81,7 +81,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --editor-selection-bg: oklch(0 0 0 / 0.2);
 }
 
 .dark {
@@ -116,7 +115,6 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --editor-selection-bg: oklch(1 0 0 / 0.2);
 }
 
 @layer base {
@@ -147,6 +145,7 @@
   --line-through-clr: oklch(70% 0 0);
   --task-list-accent-clr: oklch(0 0 0);
   --list-marker-clr: oklch(40% 0 0);
+  --editor-selection-bg: oklch(0 0 0 / 0.2);
 }
 .dark {
   .tiptap-text-editor.tiptap-text-editor {
@@ -156,6 +155,7 @@
     --line-through-clr: oklch(55% 0 0);
     --task-list-accent-clr: oklch(95% 0 0);
     --list-marker-clr: oklch(70% 0 0);
+    --editor-selection-bg: oklch(1 0 0 / 0.2);
   }
 }
 
