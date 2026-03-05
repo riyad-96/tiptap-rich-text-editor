@@ -25,7 +25,7 @@ import {
   QuoteIcon,
 } from 'lucide-react';
 import { CommandList, CommandListProps } from './command-list';
-import { SuggestionItem } from '../types/slash-command';
+import { SuggestionItem } from '../../types/slash-command';
 
 export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
   items: ({ query }) => {

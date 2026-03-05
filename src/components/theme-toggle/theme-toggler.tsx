@@ -15,7 +15,6 @@ export function ThemeToggler() {
     <Button
       variant="secondary"
       size="sm"
-      className="fixed top-4 right-4"
       onClick={() => {
         setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
       }}

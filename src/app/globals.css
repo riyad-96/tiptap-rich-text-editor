@@ -243,7 +243,6 @@ div:has(.tiptap-bubble-menu-inner-element) {
     top 150ms ease-out;
   will-change: left, top;
 }
-
 span.suggestion[data-decoration-content] {
   display: inline-block;
   font-weight: 600;
@@ -251,7 +250,6 @@ span.suggestion[data-decoration-content] {
   isolation: isolate;
   position: relative;
 }
-
 span.suggestion[data-decoration-content]::before {
   content: '';
   position: absolute;
@@ -267,7 +265,11 @@ span.suggestion[data-decoration-content]::before {
     cursor: pointer;
   }
 }
-
+.tiptap-preview {
+  label:has(input[type='checkbox']) {
+    pointer-events: none;
+  }
+}
 /*================================
   Tiptap text editor stylings ends
 ================================*/

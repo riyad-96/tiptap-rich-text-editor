@@ -1,11 +1,11 @@
-import { TextEditor } from '@/components/text-editor/text-editor';
-import { ThemeToggler } from '@/components/theme-toggle/theme-toggler';
+import { Header } from '@/components/layout/header';
+import { SideBySideView } from '@/components/layout/side-by-side-view';
 
 export default function page() {
   return (
-    <div className="mx-auto max-w-250 px-4 py-20">
-      <ThemeToggler />
-      <TextEditor />
+    <div className="grid h-screen grid-rows-[auto_1fr]">
+      <Header />
+      <SideBySideView />
     </div>
   );
 }
