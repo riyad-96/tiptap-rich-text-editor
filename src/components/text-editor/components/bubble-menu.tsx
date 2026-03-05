@@ -1,5 +1,4 @@
 import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
-import type { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import { BubbleMenu as TiptapBubbleMenu } from '@tiptap/react/menus';
 
@@ -11,8 +10,11 @@ import { ToolbarLists } from './toolbar-lists';
 import { ToolbarColorSelector } from './toolbar-color-selector';
 import { ToolbarLink } from './toolbar-link';
 import { ToolbarBasicTools } from './toolbar-basic-tools';
+import { useEditorProvider } from '../hooks/use-editor-provider';
 
-export function BubbleMenu({ editor }: { editor: Editor }) {
+export function BubbleMenu() {
+  const { editor, isBubbleMenuHidden } = useEditorProvider();
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
@@ -24,6 +26,8 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
     },
   });
 
+  if (isBubbleMenuHidden) return <></>;
+
   return (
     <TiptapBubbleMenu
       editor={editor}
@@ -32,8 +36,8 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
       }
       updateDelay={80}
     >
-      <ToolbarTextBlocks editor={editor} />
-      <ToolbarLists editor={editor} />
+      <ToolbarTextBlocks />
+      <ToolbarLists />
 
       <Toggle
         size="sm"
@@ -56,15 +60,15 @@ export function BubbleMenu({ editor }: { editor: Editor }) {
 
       <ToolbarSeparator />
 
-      <ToolbarBasicTools editor={editor} />
+      <ToolbarBasicTools />
 
       <ToolbarSeparator />
 
-      <ToolbarColorSelector editor={editor} />
+      <ToolbarColorSelector />
 
       <ToolbarSeparator />
 
-      <ToolbarLink editor={editor} />
+      <ToolbarLink />
     </TiptapBubbleMenu>
   );
 }

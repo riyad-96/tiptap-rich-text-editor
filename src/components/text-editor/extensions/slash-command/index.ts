@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Extension } from '@tiptap/core';
 import Suggestion from '@tiptap/suggestion';
+
 import { suggestion } from './suggestions';
 
 export const SlashCommand = Extension.create({

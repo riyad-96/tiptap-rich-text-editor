@@ -4,9 +4,10 @@ import Superscript from '@tiptap/extension-superscript';
 import TextAlign from '@tiptap/extension-text-align';
 import { Color, TextStyle } from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
-import { SlashCommand } from './slash-command';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
+
+import { SlashCommand } from './slash-command';
 
 type TiptapExtensionProps = {
   placeholder?: string | boolean;

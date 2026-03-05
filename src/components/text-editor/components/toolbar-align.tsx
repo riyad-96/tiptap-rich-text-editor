@@ -1,5 +1,3 @@
-import { Toggle } from '@/components/ui';
-import type { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import {
   TextAlignCenterIcon,
@@ -8,7 +6,13 @@ import {
   TextAlignStartIcon,
 } from 'lucide-react';
 
-export function ToolbarAlign({ editor }: { editor: Editor }) {
+import { Toggle } from '@/components/ui';
+
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbarAlign() {
+  const { editor } = useEditorProvider();
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => ({

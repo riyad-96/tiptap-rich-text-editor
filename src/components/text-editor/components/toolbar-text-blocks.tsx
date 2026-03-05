@@ -1,11 +1,5 @@
-import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
-import { type Editor, useEditorState } from '@tiptap/react';
+import { useState } from 'react';
+import { useEditorState } from '@tiptap/react';
 import {
   ChevronDownIcon,
   Heading1Icon,
@@ -16,16 +10,20 @@ import {
   PilcrowIcon,
   TypeIcon,
 } from 'lucide-react';
-import { useState } from 'react';
 
-export function ToolbarTextBlocks({
-  editor,
-  modal = false,
-}: {
-  editor: Editor;
-  modal?: boolean;
-}) {
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbarTextBlocks({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);
+  const { editor } = useEditorProvider();
 
   const editorState = useEditorState({
     editor,

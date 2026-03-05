@@ -1,7 +1,8 @@
+import { useEditorState } from '@tiptap/react';
+import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
+
 import { Toggle } from '@/components/ui';
 
-import { type Editor, useEditorState } from '@tiptap/react';
-import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
 import { ToolbarLink } from './toolbar-link';
 import { ToolbarTextBlocks } from './toolbar-text-blocks';
 import { ToolbarSeparator } from './toolbar-separator';
@@ -11,8 +12,11 @@ import { ToolbarColorSelector } from './toolbar-color-selector';
 import { ToolbarAlign } from './toolbar-align';
 import { ToolbarSupSubscript } from './toolbar-super-sub-script';
 import { ToolbarBasicTools } from './toolbar-basic-tools';
+import { useEditorProvider } from '../hooks/use-editor-provider';
 
-export function ToolBar({ editor }: { editor: Editor }) {
+export function ToolBar() {
+  const { editor } = useEditorProvider();
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
@@ -30,12 +34,12 @@ export function ToolBar({ editor }: { editor: Editor }) {
         'bg-background flex min-w-0 items-center gap-1 overflow-x-auto border-b p-2'
       }
     >
-      <ToolbalUndoRedo editor={editor} />
+      <ToolbalUndoRedo />
 
       <ToolbarSeparator />
 
-      <ToolbarTextBlocks editor={editor} />
-      <ToolbarLists editor={editor} />
+      <ToolbarTextBlocks />
+      <ToolbarLists />
 
       <Toggle
         size="sm"
@@ -58,23 +62,23 @@ export function ToolBar({ editor }: { editor: Editor }) {
 
       <ToolbarSeparator />
 
-      <ToolbarBasicTools editor={editor} />
+      <ToolbarBasicTools />
 
       <ToolbarSeparator />
 
-      <ToolbarColorSelector editor={editor} />
+      <ToolbarColorSelector />
 
       <ToolbarSeparator />
 
-      <ToolbarLink editor={editor} />
+      <ToolbarLink />
 
       <ToolbarSeparator />
 
-      <ToolbarAlign editor={editor} />
+      <ToolbarAlign />
 
       <ToolbarSeparator />
 
-      <ToolbarSupSubscript editor={editor} />
+      <ToolbarSupSubscript />
     </div>
   );
 }

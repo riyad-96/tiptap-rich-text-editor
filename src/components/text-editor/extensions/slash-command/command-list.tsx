@@ -5,8 +5,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import { SuggestionItem } from '../../types/slash-command';
+
 import { Button } from '@/components/ui/button';
+
+import { SuggestionItem } from '../../types/slash-command';
 
 export interface CommandListProps {
   items: SuggestionItem[];

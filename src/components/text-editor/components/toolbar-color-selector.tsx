@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import { useEditorState } from '@tiptap/react';
+import { ChevronDownIcon, PaletteIcon } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Popover,
@@ -5,19 +9,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { type Editor } from '@tiptap/core';
-import { useEditorState } from '@tiptap/react';
-import { ChevronDownIcon, PaletteIcon } from 'lucide-react';
-import { useState } from 'react';
 
-export function ToolbarColorSelector({
-  editor,
-  modal = false,
-}: {
-  editor: Editor;
-  modal?: boolean;
-}) {
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbarColorSelector({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);
+  const { editor } = useEditorProvider();
 
   const editorState = useEditorState({
     editor,

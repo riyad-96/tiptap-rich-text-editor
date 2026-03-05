@@ -1,4 +1,5 @@
-import { type Editor, useEditorState } from '@tiptap/react';
+import { useState } from 'react';
+import { useEditorState } from '@tiptap/react';
 import {
   ChevronDownIcon,
   ListIcon,
@@ -13,16 +14,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
 
-export function ToolbarLists({
-  editor,
-  modal = false,
-}: {
-  editor: Editor;
-  modal?: boolean;
-}) {
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbarLists({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);
+  const { editor } = useEditorProvider();
 
   const editorState = useEditorState({
     editor,

@@ -1,10 +1,4 @@
-import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { type Editor } from '@tiptap/core';
+import { useRef, useState } from 'react';
 import { useEditorState } from '@tiptap/react';
 import {
   CornerDownLeftIcon,
@@ -13,19 +7,23 @@ import {
   TrashIcon,
   UnlinkIcon,
 } from 'lucide-react';
-import { useRef, useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+
 import { ToolbarSeparator } from './toolbar-separator';
 import { Tooltip } from './tootltip';
+import { useEditorProvider } from '../hooks/use-editor-provider';
 
-export function ToolbarLink({
-  editor,
-  modal = false,
-}: {
-  editor: Editor;
-  modal?: boolean;
-}) {
+export function ToolbarLink({ modal = false }: { modal?: boolean }) {
   const [linkUrl, setLinkUrl] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
+  const { editor } = useEditorProvider();
 
   const editorState = useEditorState({
     editor,

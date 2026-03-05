@@ -24,6 +24,7 @@ import {
   SquareCodeIcon,
   QuoteIcon,
 } from 'lucide-react';
+
 import { CommandList, CommandListProps } from './command-list';
 import { SuggestionItem } from '../../types/slash-command';
 

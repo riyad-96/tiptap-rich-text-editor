@@ -1,5 +1,6 @@
 import type { JSONContent } from '@tiptap/core';
 import { generateHTML } from '@tiptap/html';
+
 import { tiptapExtensions } from './extensions';
 import { tiptapStyleClasses } from './style';
 

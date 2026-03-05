@@ -1,9 +1,13 @@
-import { Toggle } from '@/components/ui';
-import { type Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import { SubscriptIcon, SuperscriptIcon } from 'lucide-react';
 
-export function ToolbarSupSubscript({ editor }: { editor: Editor }) {
+import { Toggle } from '@/components/ui';
+
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbarSupSubscript() {
+  const { editor } = useEditorProvider();
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => ({

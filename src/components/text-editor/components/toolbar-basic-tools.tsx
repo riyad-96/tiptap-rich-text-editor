@@ -1,5 +1,3 @@
-import { Toggle } from '@/components/ui';
-import { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import {
   BoldIcon,
@@ -9,7 +7,13 @@ import {
   UnderlineIcon,
 } from 'lucide-react';
 
-export function ToolbarBasicTools({ editor }: { editor: Editor }) {
+import { Toggle } from '@/components/ui';
+
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbarBasicTools() {
+  const { editor } = useEditorProvider();
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => ({

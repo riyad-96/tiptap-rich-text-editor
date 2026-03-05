@@ -1,9 +1,13 @@
-import { Button } from '@/components/ui/button';
-import { type Editor } from '@tiptap/core';
-import { useEditorState } from '@tiptap/react';
 import { Redo2Icon, Undo2Icon } from 'lucide-react';
+import { useEditorState } from '@tiptap/react';
 
-export function ToolbalUndoRedo({ editor }: { editor: Editor }) {
+import { Button } from '@/components/ui/button';
+
+import { useEditorProvider } from '../hooks/use-editor-provider';
+
+export function ToolbalUndoRedo() {
+  const { editor } = useEditorProvider();
+
   const editorState = useEditorState({
     editor,
     selector: () => ({
