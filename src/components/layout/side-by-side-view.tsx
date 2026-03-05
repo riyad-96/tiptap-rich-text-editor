@@ -60,6 +60,7 @@ export function SideBySideView() {
           onChange={(editor) => {
             setContent(editor.getJSON());
           }}
+          placeholder="Type '/' for commands..."
         />
       </div>
 

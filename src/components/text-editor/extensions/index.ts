@@ -6,18 +6,37 @@ import { Color, TextStyle } from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import { SlashCommand } from './slash-command';
 import Highlight from '@tiptap/extension-highlight';
+import Placeholder from '@tiptap/extension-placeholder';
 
-export const tiptapExtensions = [
-  StarterKit,
-  Highlight.configure({ multicolor: true }),
-  TaskList,
-  TaskItem,
-  TextStyle,
-  Color,
-  TextAlign.configure({
-    types: ['heading', 'paragraph'],
-  }),
-  Superscript,
-  Subscript,
-  SlashCommand,
-];
+type TiptapExtensionProps = {
+  placeholder?: string | boolean;
+};
+
+export const tiptapExtensions = (props?: TiptapExtensionProps) => {
+  let placeholder = '';
+  if (props) {
+    placeholder = props.placeholder
+      ? typeof props.placeholder === 'string'
+        ? props.placeholder
+        : 'Write something...'
+      : '';
+  }
+
+  return [
+    StarterKit,
+    Highlight.configure({ multicolor: true }),
+    TaskList,
+    TaskItem,
+    TextStyle,
+    Color,
+    TextAlign.configure({
+      types: ['heading', 'paragraph'],
+    }),
+    Superscript,
+    Subscript,
+    SlashCommand,
+    Placeholder.configure({
+      placeholder,
+    }),
+  ];
+};

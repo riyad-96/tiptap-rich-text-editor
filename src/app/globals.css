@@ -270,6 +270,28 @@ span.suggestion[data-decoration-content]::before {
     pointer-events: none;
   }
 }
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: oklch(70% 0 0);
+  pointer-events: none;
+  height: 0;
+}
+.tippy-slash-command-container {
+  animation: scale-out 150ms forwards;
+  transform-origin: top left;
+}
+
+@keyframes scale-out {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 /*================================
   Tiptap text editor stylings ends
 ================================*/

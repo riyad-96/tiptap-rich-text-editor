@@ -10,7 +10,7 @@ export function Viewer({
 }) {
   if (!content) return <></>;
 
-  const html = generateHTML(content, tiptapExtensions);
+  const html = generateHTML(content, tiptapExtensions());
 
   return (
     <div className="h-full overflow-x-auto">

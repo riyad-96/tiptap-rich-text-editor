@@ -13,15 +13,17 @@ export type TextEditorProps = {
   hideBubbleMenuOnTouch?: boolean;
   content?: Content;
   onChange?: (value: Editor) => void;
+  placeholder?: string | boolean;
 };
 
 export function TextEditor({
   hideBubbleMenuOnTouch = true,
   content,
   onChange,
+  placeholder,
 }: TextEditorProps) {
   const editor = useEditor({
-    extensions: tiptapExtensions,
+    extensions: tiptapExtensions({ placeholder }),
     immediatelyRender: false,
     editorProps: {
       attributes: {
