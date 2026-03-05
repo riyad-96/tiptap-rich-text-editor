@@ -3,6 +3,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useEditorProvider } from '../hooks/use-editor-provider';
 
 type TooltipProps = {
   children: React.ReactNode;
@@ -15,15 +16,19 @@ export function Tooltip({
   children,
   content,
   disabled,
-  side = 'top',
+  side = 'bottom',
 }: TooltipProps) {
+  const { hideTooltip } = useEditorProvider();
+
   return (
     <ShadcnTooltip>
       <TooltipTrigger asChild disabled={disabled}>
         {children}
       </TooltipTrigger>
 
-      <TooltipContent side={side}>{content}</TooltipContent>
+      <TooltipContent hidden={Boolean(hideTooltip)} side={side}>
+        {content}
+      </TooltipContent>
     </ShadcnTooltip>
   );
 }

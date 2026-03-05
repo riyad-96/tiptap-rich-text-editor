@@ -6,9 +6,10 @@ import {
   TextAlignStartIcon,
 } from 'lucide-react';
 
-import { Toggle } from '@/components/ui';
+import { Tooltip } from './tooltip';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Button } from '@/components/ui/button';
 
 export function ToolbarAlign() {
   const { editor } = useEditorProvider();
@@ -34,6 +35,7 @@ export function ToolbarAlign() {
       isActive: editorState.isLeft,
       icon: TextAlignStartIcon,
       can: editorState.canLeft,
+      text: 'Align left',
     },
     {
       id: 2,
@@ -41,6 +43,7 @@ export function ToolbarAlign() {
       isActive: editorState.isCenter,
       icon: TextAlignCenterIcon,
       can: editorState.canCenter,
+      text: 'Align center',
     },
     {
       id: 3,
@@ -48,6 +51,7 @@ export function ToolbarAlign() {
       isActive: editorState.isRight,
       icon: TextAlignEndIcon,
       can: editorState.canRight,
+      text: 'Align right',
     },
     {
       id: 4,
@@ -55,23 +59,25 @@ export function ToolbarAlign() {
       isActive: editorState.isJustify,
       icon: TextAlignJustifyIcon,
       can: editorState.canJustify,
+      text: 'Align justify',
     },
   ];
 
   return (
     <div className="flex items-center gap-1">
       {alignments.map((a) => (
-        <Toggle
-          key={a.id}
-          size="sm"
-          pressed={a.isActive}
-          onPressedChange={() =>
-            editor.chain().focus().toggleTextAlign(a.align).run()
-          }
-          disabled={!a.can}
-        >
-          <a.icon />
-        </Toggle>
+        <Tooltip key={a.id} content={a.text} disabled={!a.can}>
+          <Button
+            size="sm"
+            variant={a.isActive ? 'secondary' : 'ghost'}
+            onClick={() =>
+              editor.chain().focus().toggleTextAlign(a.align).run()
+            }
+            aria-label={a.text}
+          >
+            <a.icon />
+          </Button>
+        </Tooltip>
       ))}
     </div>
   );

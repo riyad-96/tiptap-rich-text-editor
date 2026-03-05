@@ -11,6 +11,7 @@ import {
 import { cn } from '@/lib/utils';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
 
 export function ToolbarColorSelector({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -84,16 +85,18 @@ export function ToolbarColorSelector({ modal = false }: { modal?: boolean }) {
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal={modal}>
-      <PopoverTrigger asChild disabled={!canColorOrHighlight}>
-        <Button
-          variant={isColorActive ? 'secondary' : 'ghost'}
-          size="sm"
-          className={cn('flex items-center gap-0.5 pe-1!')}
-        >
-          <PaletteIcon />
-          <ChevronDownIcon className="size-2.5" />
-        </Button>
-      </PopoverTrigger>
+      <Tooltip content={'Highligt'} disabled={!canColorOrHighlight}>
+        <PopoverTrigger asChild>
+          <Button
+            variant={isColorActive ? 'secondary' : 'ghost'}
+            size="sm"
+            className={cn('flex items-center gap-0.5 pe-1!')}
+          >
+            <PaletteIcon />
+            <ChevronDownIcon className="size-2.5" />
+          </Button>
+        </PopoverTrigger>
+      </Tooltip>
 
       <PopoverContent align="start" className="w-fit overflow-hidden p-0">
         <div className="max-h-62.5 min-w-37.5 space-y-2.5 overflow-y-auto p-1 py-2">

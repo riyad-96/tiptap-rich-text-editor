@@ -7,9 +7,10 @@ import {
   UnderlineIcon,
 } from 'lucide-react';
 
-import { Toggle } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
 
 export function ToolbarBasicTools() {
   const { editor } = useEditorProvider();
@@ -30,57 +31,63 @@ export function ToolbarBasicTools() {
     }),
   });
 
+  const basicTools = [
+    {
+      id: 1,
+      text: 'Bold',
+      isActive: editorState.isBold,
+      can: editorState.canBold,
+      onClick: () => editor.chain().focus().toggleBold().run(),
+      icon: BoldIcon,
+    },
+    {
+      id: 2,
+      text: 'Italic',
+      isActive: editorState.isItalic,
+      can: editorState.canItalic,
+      onClick: () => editor.chain().focus().toggleItalic().run(),
+      icon: ItalicIcon,
+    },
+    {
+      id: 3,
+      text: 'Underline',
+      isActive: editorState.isUnderline,
+      can: editorState.canUnderline,
+      onClick: () => editor.chain().focus().toggleUnderline().run(),
+      icon: UnderlineIcon,
+    },
+    {
+      id: 4,
+      text: 'Strike',
+      isActive: editorState.isStrike,
+      can: editorState.canStrike,
+      onClick: () => editor.chain().focus().toggleStrike().run(),
+      icon: StrikethroughIcon,
+    },
+    {
+      id: 5,
+      text: 'Code',
+      isActive: editorState.isCode,
+      can: editorState.canCode,
+      onClick: () => editor.chain().focus().toggleCode().run(),
+      icon: CodeXmlIcon,
+    },
+  ];
+
   return (
     <div className="flex gap-1">
-      <Toggle
-        size="sm"
-        pressed={editorState.isBold}
-        onPressedChange={() => editor.chain().focus().toggleBold().run()}
-        aria-label="Toggle bold"
-        disabled={!editorState.canBold}
-      >
-        <BoldIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.isItalic}
-        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-        aria-label="Toggle Italic"
-        disabled={!editorState.canItalic}
-      >
-        <ItalicIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.isUnderline}
-        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-        aria-label="Toggle underline"
-        disabled={!editorState.canUnderline}
-      >
-        <UnderlineIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.isStrike}
-        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-        aria-label="Toggle strikethrough"
-        disabled={!editorState.canStrike}
-      >
-        <StrikethroughIcon className="size-4" />
-      </Toggle>
-
-      <Toggle
-        size="sm"
-        pressed={editorState.isCode}
-        onPressedChange={() => editor.chain().focus().toggleCode().run()}
-        aria-label="Toggle code"
-        disabled={!editorState.canCode}
-      >
-        <CodeXmlIcon className="size-4" />
-      </Toggle>
+      {basicTools.map((t) => (
+        <Tooltip content={t.text} disabled={!t.can} key={t.id}>
+          <Button
+            size="sm"
+            variant={t.isActive ? 'secondary' : 'ghost'}
+            onClick={t.onClick}
+            aria-label="Toggle bold"
+          >
+            <t.icon className="size-4" />
+          </Button>
+        </Tooltip>
+      ))}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useEditorState } from '@tiptap/react';
 import { Button } from '@/components/ui/button';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
 
 export function ToolbalUndoRedo() {
   const { editor } = useEditorProvider();
@@ -18,27 +19,29 @@ export function ToolbalUndoRedo() {
 
   return (
     <div className="flex gap-1">
-      <Button
-        type="button"
-        size="sm"
-        variant="ghost"
-        onClick={() => editor.chain().focus().undo().run()}
-        disabled={!editorState.canUndo}
-        aria-label="Undo"
-      >
-        <Undo2Icon className="size-4" />
-      </Button>
+      <Tooltip content="Undo" disabled={!editorState.canUndo}>
+        <Button
+          type="button"
+          size="sm"
+          variant="ghost"
+          onClick={() => editor.chain().focus().undo().run()}
+          aria-label="Undo"
+        >
+          <Undo2Icon className="size-4" />
+        </Button>
+      </Tooltip>
 
-      <Button
-        type="button"
-        size="sm"
-        variant="ghost"
-        onClick={() => editor.chain().focus().redo().run()}
-        disabled={!editorState.canRedo}
-        aria-label="Redo"
-      >
-        <Redo2Icon className="size-4" />
-      </Button>
+      <Tooltip content="Redo" disabled={!editorState.canRedo}>
+        <Button
+          type="button"
+          size="sm"
+          variant="ghost"
+          onClick={() => editor.chain().focus().redo().run()}
+          aria-label="Redo"
+        >
+          <Redo2Icon className="size-4" />
+        </Button>
+      </Tooltip>
     </div>
   );
 }

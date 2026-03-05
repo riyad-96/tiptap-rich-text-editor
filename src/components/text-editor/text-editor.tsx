@@ -17,6 +17,7 @@ export function TextEditor({
   content,
   onChange,
   placeholder,
+  hideTooltip = false,
 }: TextEditorProps) {
   const editor = useEditor({
     extensions: tiptapExtensions({ placeholder }),
@@ -51,6 +52,7 @@ export function TextEditor({
       value={{
         editor,
         isBubbleMenuHidden,
+        hideTooltip,
       }}
     >
       <TooltipProvider>

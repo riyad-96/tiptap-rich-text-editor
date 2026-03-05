@@ -16,6 +16,7 @@ import {
 import { cn } from '@/lib/utils';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
 
 export function ToolbarLists({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ export function ToolbarLists({ modal = false }: { modal?: boolean }) {
       id: 2,
       icon: ListOrderedIcon,
       onClick: () => editor.chain().focus().toggleOrderedList().run(),
-      text: 'Ordered List',
+      text: 'Number List',
       isActive: editorState.isOrderedList,
     },
     {
@@ -58,25 +59,27 @@ export function ToolbarLists({ modal = false }: { modal?: boolean }) {
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal={modal}>
-      <PopoverTrigger asChild>
-        <Button
-          variant={activeList ? 'secondary' : 'ghost'}
-          size="sm"
-          className={cn('flex items-center gap-0.5 pe-1!')}
-        >
-          <span>
-            {activeList ? (
-              <>
-                <activeList.icon />
-              </>
-            ) : (
-              <ListIcon />
-            )}
-          </span>
+      <Tooltip content="List">
+        <PopoverTrigger asChild>
+          <Button
+            variant={activeList ? 'secondary' : 'ghost'}
+            size="sm"
+            className={cn('flex items-center gap-0.5 pe-1!')}
+          >
+            <span>
+              {activeList ? (
+                <>
+                  <activeList.icon />
+                </>
+              ) : (
+                <ListIcon />
+              )}
+            </span>
 
-          <ChevronDownIcon className="size-2.5" />
-        </Button>
-      </PopoverTrigger>
+            <ChevronDownIcon className="size-2.5" />
+          </Button>
+        </PopoverTrigger>
+      </Tooltip>
 
       <PopoverContent align="start" className="grid w-fit p-1">
         {lists.map((l) => (

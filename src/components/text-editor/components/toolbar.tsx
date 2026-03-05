@@ -13,6 +13,8 @@ import { ToolbarAlign } from './toolbar-align';
 import { ToolbarSupSubscript } from './toolbar-super-sub-script';
 import { ToolbarBasicTools } from './toolbar-basic-tools';
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
+import { Button } from '@/components/ui/button';
 
 export function ToolBar() {
   const { editor } = useEditorProvider();
@@ -41,24 +43,27 @@ export function ToolBar() {
       <ToolbarTextBlocks />
       <ToolbarLists />
 
-      <Toggle
-        size="sm"
-        pressed={editorState.isBlockQuote}
-        onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
-        aria-label="Toggle blockquote"
-        disabled={!editorState.canBlockQuote}
-      >
-        <TextQuoteIcon className="size-4" />
-      </Toggle>
+      <Tooltip content={'Blockquote'} disabled={!editorState.canBlockQuote}>
+        <Button
+          size="sm"
+          variant={editorState.isBlockQuote ? 'secondary' : 'ghost'}
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          aria-label="Toggle blockquote"
+        >
+          <TextQuoteIcon className="size-4" />
+        </Button>
+      </Tooltip>
 
-      <Toggle
-        size="sm"
-        pressed={editorState.isCodeBlock}
-        onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
-        aria-label="Toggle code block"
-      >
-        <CodeSquareIcon className="size-4" />
-      </Toggle>
+      <Tooltip content={'Blockquote'}>
+        <Button
+          size="sm"
+          variant={editorState.isCodeBlock ? 'secondary' : 'ghost'}
+          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+          aria-label="Toggle code block"
+        >
+          <CodeSquareIcon className="size-4" />
+        </Button>
+      </Tooltip>
 
       <ToolbarSeparator />
 

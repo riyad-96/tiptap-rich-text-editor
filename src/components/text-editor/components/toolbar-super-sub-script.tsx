@@ -4,6 +4,8 @@ import { SubscriptIcon, SuperscriptIcon } from 'lucide-react';
 import { Toggle } from '@/components/ui';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
+import { Button } from '@/components/ui/button';
 
 export function ToolbarSupSubscript() {
   const { editor } = useEditorProvider();
@@ -20,23 +22,25 @@ export function ToolbarSupSubscript() {
 
   return (
     <div className="flex items-center gap-1">
-      <Toggle
-        size="sm"
-        pressed={editorState.isSup}
-        onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
-        disabled={!editorState.canSup}
-      >
-        <SuperscriptIcon />
-      </Toggle>
+      <Tooltip content="Superscript" disabled={!editorState.canSup}>
+        <Button
+          size="sm"
+          variant={editorState.isSup ? 'secondary' : 'ghost'}
+          onClick={() => editor.chain().focus().toggleSuperscript().run()}
+        >
+          <SuperscriptIcon />
+        </Button>
+      </Tooltip>
 
-      <Toggle
-        size="sm"
-        pressed={editorState.isSub}
-        onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
-        disabled={!editorState.canSub}
-      >
-        <SubscriptIcon />
-      </Toggle>
+      <Tooltip content="Subscript" disabled={!editorState.canSub}>
+        <Button
+          size="sm"
+          variant={editorState.isSub ? 'secondary' : 'ghost'}
+          onClick={() => editor.chain().focus().toggleSubscript().run()}
+        >
+          <SubscriptIcon />
+        </Button>
+      </Tooltip>
     </div>
   );
 }

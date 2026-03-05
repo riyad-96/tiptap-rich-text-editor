@@ -20,6 +20,7 @@ import {
 import { cn } from '@/lib/utils';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from './tooltip';
 
 export function ToolbarTextBlocks({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -86,25 +87,27 @@ export function ToolbarTextBlocks({ modal = false }: { modal?: boolean }) {
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal={modal}>
-      <PopoverTrigger asChild>
-        <Button
-          variant={activeBlock ? 'secondary' : 'ghost'}
-          size="sm"
-          className={cn('flex items-center gap-0.5 pe-1!')}
-        >
-          <span>
-            {activeBlock ? (
-              <>
-                <activeBlock.icon />
-              </>
-            ) : (
-              <TypeIcon />
-            )}
-          </span>
+      <Tooltip content="Text">
+        <PopoverTrigger asChild>
+          <Button
+            variant={activeBlock ? 'secondary' : 'ghost'}
+            size="sm"
+            className={cn('flex items-center gap-0.5 pe-1!')}
+          >
+            <span>
+              {activeBlock ? (
+                <>
+                  <activeBlock.icon />
+                </>
+              ) : (
+                <TypeIcon />
+              )}
+            </span>
 
-          <ChevronDownIcon className="size-2.5" />
-        </Button>
-      </PopoverTrigger>
+            <ChevronDownIcon className="size-2.5" />
+          </Button>
+        </PopoverTrigger>
+      </Tooltip>
 
       <PopoverContent align="start" className="grid w-fit p-1">
         {textBlocks.map((b) => (
