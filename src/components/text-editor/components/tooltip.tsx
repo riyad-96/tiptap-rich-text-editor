@@ -22,7 +22,7 @@ export function Tooltip({
   const { hideTooltip } = useEditorProvider();
 
   return (
-    <ShadcnTooltip>
+    <ShadcnTooltip disableHoverableContent>
       <TooltipTrigger asChild disabled={disabled}>
         {children}
       </TooltipTrigger>
