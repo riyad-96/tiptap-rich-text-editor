@@ -30,6 +30,8 @@ export function SideBySideView() {
     // stop resize
     const stopResize = () => {
       document.body.style.userSelect = 'auto';
+      document.body.style.cursor = 'auto';
+
       window.removeEventListener('mousemove', resize);
       window.removeEventListener('mouseup', stopResize);
     };
@@ -38,6 +40,7 @@ export function SideBySideView() {
     const startResize = (e: MouseEvent) => {
       offset = e.clientX - resizeBar.offsetLeft;
       document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'col-resize';
 
       window.addEventListener('mousemove', resize);
       window.addEventListener('mouseup', stopResize);
