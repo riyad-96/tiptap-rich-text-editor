@@ -9,6 +9,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Image from '@tiptap/extension-image';
 
 import { SlashCommand } from './slash-command';
+import { ImagePlaceholder } from './upload-image';
 
 type TiptapExtensionProps = {
   placeholder?: string | boolean;
@@ -53,5 +54,6 @@ export const tiptapExtensions = (props?: TiptapExtensionProps) => {
         class: 'rounded-lg',
       },
     }),
+    ImagePlaceholder,
   ];
 };

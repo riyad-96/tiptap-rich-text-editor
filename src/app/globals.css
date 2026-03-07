@@ -299,12 +299,15 @@ span.suggestion[data-decoration-content]::before {
 }
 
 .tiptap [data-resize-container] {
-  /* display: inline-block; */
   margin-block: 2rem;
   max-width: fit-content;
 
   --resize-handle-bg: oklch(73.155% 0.14431 250.444);
   --image-resize-radius: 10px;
+}
+
+.tiptap [data-resize-wrapper] {
+  border-radius: var(--image-resize-radius);
 }
 
 .tiptap [data-resize-wrapper]::before {
@@ -353,12 +356,19 @@ span.suggestion[data-decoration-content]::before {
 /* Add a ring around the image when selected */
 .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
   outline: 2px solid var(--resize-handle-bg);
-  border-radius: var(--image-resize-radius);
 
   [data-resize-handle] {
     opacity: 1;
   }
 }
+
+/* .tiptap [data-resize-wrapper]:hover {
+  outline: 2px solid var(--resize-handle-bg);
+
+  [data-resize-handle] {
+    opacity: 1;
+  }
+} */
 
 /*================================
   Tiptap text editor stylings ends
