@@ -6,6 +6,7 @@ import { Color, TextStyle } from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
+import Image from '@tiptap/extension-image';
 
 import { SlashCommand } from './slash-command';
 
@@ -38,6 +39,18 @@ export const tiptapExtensions = (props?: TiptapExtensionProps) => {
     SlashCommand,
     Placeholder.configure({
       placeholder,
+    }),
+    Image.configure({
+      allowBase64: true,
+      resize: {
+        enabled: true,
+        minWidth: 50,
+        minHeight: 50,
+        alwaysPreserveAspectRatio: true,
+      },
+      HTMLAttributes: {
+        class: 'rounded-lg',
+      },
     }),
   ];
 };

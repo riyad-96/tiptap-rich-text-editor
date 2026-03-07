@@ -292,6 +292,77 @@ span.suggestion[data-decoration-content]::before {
     opacity: 1;
   }
 }
+
+.prosemirror-dropcursor-block {
+  background-color: var(--ring) !important;
+}
+
+/* 1. The Container Logic */
+.tiptap [data-resize-container] {
+  display: inline-block; /* Fits the image width */
+  margin-block: 2rem;
+}
+
+.tiptap [data-resize-wrapper]::before {
+  position: absolute;
+  isolation: isolate;
+  content: '';
+  inset: -10px;
+  pointer-events: none;
+}
+
+.tiptap [data-resize-wrapper]:hover::before {
+  pointer-events: all;
+}
+
+.tiptap [data-resize-wrapper] img {
+  margin-block: 0;
+  border-radius: 10px;
+}
+
+/* 2. Base Handle Styling */
+.tiptap [data-resize-handle] {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--background);
+  outline: 3px solid lch(from var(--ring) l c h / 0.5);
+  border-radius: 100%;
+  z-index: 2;
+}
+
+.tiptap [data-resize-handle='top-left'] {
+  top: 0;
+  left: 0;
+  translate: -50% -50%;
+  cursor: nwse-resize;
+}
+
+.tiptap [data-resize-handle='top-right'] {
+  top: 0;
+  right: 0;
+  translate: 50% -50%;
+  cursor: nesw-resize;
+}
+
+.tiptap [data-resize-handle='bottom-left'] {
+  bottom: 0;
+  left: 0;
+  translate: -50% 50%;
+  cursor: nesw-resize;
+}
+
+.tiptap [data-resize-handle='bottom-right'] {
+  bottom: 0;
+  right: 0;
+  translate: 50% 50%;
+  cursor: nwse-resize;
+}
+
+/* Add a ring around the image when selected */
+.tiptap .ProseMirror-selectednode [data-resize-wrapper] {
+}
+
 /*================================
   Tiptap text editor stylings ends
 ================================*/

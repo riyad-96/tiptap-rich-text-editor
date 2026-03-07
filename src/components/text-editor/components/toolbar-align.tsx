@@ -66,7 +66,7 @@ export function ToolbarAlign() {
   return (
     <div className="flex items-center gap-1">
       {alignments.map((a) => (
-        <Tooltip key={a.id} content={a.text} disabled={!a.can}>
+        <Tooltip key={a.id} content={a.text} >
           <Button
             size="sm"
             variant={a.isActive ? 'secondary' : 'ghost'}

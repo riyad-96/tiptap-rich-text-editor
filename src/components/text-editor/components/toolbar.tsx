@@ -14,6 +14,7 @@ import { ToolbarSupSubscript } from './toolbar-super-sub-script';
 import { ToolbarBasicTools } from './toolbar-basic-tools';
 import { useEditorProvider } from '../hooks/use-editor-provider';
 import { Tooltip } from './tooltip';
+import { ToolbarImage } from './toolbar-image';
 
 export function ToolBar() {
   const { editor } = useEditorProvider();
@@ -83,6 +84,10 @@ export function ToolBar() {
       <ToolbarSeparator />
 
       <ToolbarSupSubscript />
+
+      <ToolbarSeparator />
+
+      <ToolbarImage />
     </div>
   );
 }
