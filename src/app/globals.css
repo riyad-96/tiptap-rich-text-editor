@@ -375,6 +375,15 @@ span.suggestion[data-decoration-content]::before {
   opacity: 0.6;
 }
 
+.tiptap.ProseMirror + div:has(.tiptap-global-drag-handler-container) {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.tiptap.ProseMirror:hover + div:has(.tiptap-global-drag-handler-container) {
+  opacity: 1;
+}
+
 .tiptap-global-drag-handler-container:hover {
   opacity: 1;
 }
