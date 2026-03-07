@@ -59,7 +59,7 @@ export function SideBySideView() {
     <div className="flex min-h-0 min-w-0">
       <div ref={leftPanelRef} className="w-1/2">
         <TextEditor
-          content='<h5>Todo:</h5><ul data-type="taskList"><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Side by side view: editor | preview</p></div></li><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Test json as editor content</p></div></li><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Slash command</p></div></li><li data-checked="false" data-type="taskItem"><label><input type="checkbox"><span></span></label><div><p>Image upload</p></div></li></ul><p></p>'
+          content='<h5>Todo:</h5><ul data-type="taskList"><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Side by side view: editor | preview</p></div></li><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Test json as editor content</p></div></li><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Slash command</p></div></li><li data-checked="true" data-type="taskItem"><label><input type="checkbox" checked="checked"><span></span></label><div><p>Image upload</p></div></li></ul><p></p>'
           onChange={(editor) => {
             setContent(editor.getJSON());
           }}
