@@ -23,6 +23,7 @@ import {
   CodeIcon,
   SquareCodeIcon,
   QuoteIcon,
+  ImagePlusIcon,
 } from 'lucide-react';
 
 import { CommandList, CommandListProps } from './command-list';
@@ -198,6 +199,20 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
         search_term: ['strike', 'strikethrough', 'delete', 'remove'],
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleStrike().run();
+        },
+      },
+      {
+        title: 'Image',
+        description: 'Insert image',
+        icon: ImagePlusIcon,
+        search_term: ['image', 'i', 'picture', 'photo', 'p'],
+        command: ({ editor, range }) => {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .insertImagePlaceholder()
+            .run();
         },
       },
       {
