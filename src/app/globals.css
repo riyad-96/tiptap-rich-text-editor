@@ -270,7 +270,8 @@ span.suggestion[data-decoration-content]::before {
     pointer-events: none;
   }
 }
-.tiptap p.is-node-empty::before {
+
+.tiptap.ProseMirror-focused p.is-node-empty::before {
   content: attr(data-placeholder);
   float: left;
   color: oklch(70% 0 0);
@@ -366,12 +367,12 @@ span.suggestion[data-decoration-content]::before {
 /* The Drag Handle Container */
 .tiptap-global-drag-handler-container {
   cursor: grab;
-  transition: all 0.2s ease;
+  transition: top 0.2s ease;
   width: fit-content;
   height: fit-content;
   padding-inline: 0.5rem;
   padding-block: 0.25rem;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .tiptap-global-drag-handler-container:hover {
