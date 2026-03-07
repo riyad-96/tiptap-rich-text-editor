@@ -362,13 +362,25 @@ span.suggestion[data-decoration-content]::before {
   }
 }
 
-/* .tiptap [data-resize-wrapper]:hover {
-  outline: 2px solid var(--resize-handle-bg);
+/* The Drag Handle Container */
+.tiptap-global-drag-handler-container {
+  cursor: grab;
+  transition: all 0.2s ease;
+  width: fit-content;
+  height: fit-content;
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  opacity: 0.7;
+}
 
-  [data-resize-handle] {
-    opacity: 1;
-  }
-} */
+.tiptap-global-drag-handler-container:hover {
+  opacity: 1;
+}
+
+.tiptap-global-drag-handler-container:active {
+  cursor: grabbing;
+  opacity: 1;
+}
 
 /*================================
   Tiptap text editor stylings ends

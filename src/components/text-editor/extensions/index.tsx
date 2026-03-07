@@ -7,6 +7,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
 import Image from '@tiptap/extension-image';
+import DragHandle from '@tiptap/extension-drag-handle';
 
 import { SlashCommand } from './slash-command';
 import { ImagePlaceholder } from './upload-image';
@@ -55,5 +56,20 @@ export const tiptapExtensions = (props?: TiptapExtensionProps) => {
       },
     }),
     ImagePlaceholder,
+    DragHandle.configure({
+      render: () => {
+        const element = document.createElement('div');
+        element.classList.add('tiptap-global-drag-handler-container');
+
+        // You can inject a Lucide icon or simple dots here
+        element.innerHTML = `
+      <svg class="tiptap-global-drag-handler" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
+      </svg>
+    `;
+
+        return element;
+      },
+    }),
   ];
 };
