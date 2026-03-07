@@ -44,6 +44,7 @@ export const tiptapExtensions = (props?: TiptapExtensionProps) => {
       allowBase64: true,
       resize: {
         enabled: true,
+        directions: ['left', 'right'],
         minWidth: 50,
         minHeight: 50,
         alwaysPreserveAspectRatio: true,

@@ -295,72 +295,69 @@ span.suggestion[data-decoration-content]::before {
 
 .prosemirror-dropcursor-block {
   background-color: var(--ring) !important;
+  border-block: 1px solid var(--ring);
 }
 
-/* 1. The Container Logic */
 .tiptap [data-resize-container] {
-  display: inline-block; /* Fits the image width */
+  /* display: inline-block; */
   margin-block: 2rem;
+  max-width: fit-content;
+
+  --resize-handle-bg: oklch(73.155% 0.14431 250.444);
+  --image-resize-radius: 10px;
 }
 
 .tiptap [data-resize-wrapper]::before {
   position: absolute;
   isolation: isolate;
   content: '';
-  inset: -10px;
-  pointer-events: none;
+  inset: 0;
 }
 
 .tiptap [data-resize-wrapper]:hover::before {
-  pointer-events: all;
+  background-color: oklch(from var(--primary) l c h / 0.1);
+  border-radius: var(--image-resize-radius);
+  cursor: pointer;
 }
 
 .tiptap [data-resize-wrapper] img {
   margin-block: 0;
-  border-radius: 10px;
+  border-radius: var(--image-resize-radius);
 }
 
-/* 2. Base Handle Styling */
 .tiptap [data-resize-handle] {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: var(--background);
-  outline: 3px solid lch(from var(--ring) l c h / 0.5);
+  background-color: var(--resize-handle-bg);
+  outline: 2px solid var(--background);
   border-radius: 100%;
   z-index: 2;
+  opacity: 0;
 }
 
-.tiptap [data-resize-handle='top-left'] {
-  top: 0;
+.tiptap [data-resize-handle='left'] {
+  top: 50% !important;
   left: 0;
-  translate: -50% -50%;
-  cursor: nwse-resize;
+  translate: calc(-50% - 2px) -50%;
+  cursor: col-resize;
 }
 
-.tiptap [data-resize-handle='top-right'] {
-  top: 0;
+.tiptap [data-resize-handle='right'] {
+  top: 50% !important;
   right: 0;
-  translate: 50% -50%;
-  cursor: nesw-resize;
-}
-
-.tiptap [data-resize-handle='bottom-left'] {
-  bottom: 0;
-  left: 0;
-  translate: -50% 50%;
-  cursor: nesw-resize;
-}
-
-.tiptap [data-resize-handle='bottom-right'] {
-  bottom: 0;
-  right: 0;
-  translate: 50% 50%;
-  cursor: nwse-resize;
+  translate: calc(50% + 2px) -50%;
+  cursor: col-resize;
 }
 
 /* Add a ring around the image when selected */
 .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
+  outline: 2px solid var(--resize-handle-bg);
+  border-radius: var(--image-resize-radius);
+
+  [data-resize-handle] {
+    opacity: 1;
+  }
 }
 
 /*================================
