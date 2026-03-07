@@ -270,12 +270,13 @@ span.suggestion[data-decoration-content]::before {
     pointer-events: none;
   }
 }
-.tiptap p.is-editor-empty:first-child::before {
+.tiptap p.is-node-empty::before {
   content: attr(data-placeholder);
   float: left;
   color: oklch(70% 0 0);
   pointer-events: none;
   height: 0;
+  font-style: italic;
 }
 .tippy-slash-command-container {
   animation: scale-out 150ms forwards;

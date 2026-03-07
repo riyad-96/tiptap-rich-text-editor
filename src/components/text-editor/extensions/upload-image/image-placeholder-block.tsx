@@ -40,7 +40,7 @@ export const ImagePlaceholderBlock = ({
 
   return (
     <NodeViewWrapper className="my-4">
-      <div className="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-neutral-200 bg-neutral-50/50 p-8 transition-colors hover:border-neutral-400 hover:bg-neutral-50">
+      <div className="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-neutral-200 bg-neutral-50/50 p-8 hover:border-neutral-400 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-neutral-600 dark:hover:bg-neutral-900">
         <Button
           onClick={deleteNode}
           className="absolute top-2 right-2 rounded-md p-1 opacity-0 group-hover:opacity-100"
@@ -51,13 +51,13 @@ export const ImagePlaceholderBlock = ({
         </Button>
 
         <div className="flex flex-col items-center gap-4 text-center select-none">
-          <div className="rounded-full bg-white p-3 shadow-sm ring-1 ring-neutral-200">
-            <ImageIcon className="h-6 w-6 text-neutral-500" />
+          <div className="rounded-full bg-white p-3 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-800">
+            <ImageIcon className="h-6 w-6 text-neutral-500 dark:text-neutral-400" />
           </div>
 
           <div>
-            <p className="text-sm font-medium text-neutral-900">Add an image</p>
-            <p className="text-xs text-neutral-500">
+            <p className="text-sm font-medium">Add an image</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">
               Upload from computer or paste a link
             </p>
           </div>
