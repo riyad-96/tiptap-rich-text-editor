@@ -1,7 +1,6 @@
 import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
 import { useEditorState } from '@tiptap/react';
 import { BubbleMenu as TiptapBubbleMenu } from '@tiptap/react/menus';
-import { TextSelection } from '@tiptap/pm/state';
 
 import { Toggle } from '@/components/ui';
 
@@ -32,11 +31,12 @@ export function BubbleMenu() {
   return (
     <TiptapBubbleMenu
       editor={editor}
+      pluginKey={'default-bubble-menu'}
       className={
         'tiptap-bubble-menu-inner-element bg-background flex flex-wrap items-center gap-1 rounded-md border p-1 shadow-lg'
       }
       updateDelay={80}
-      shouldShow={({ editor, view, state, from, to }) => {
+      shouldShow={({ editor, from, to }) => {
         if (!editor.isFocused) return false;
 
         if (from === to) return false;
@@ -48,10 +48,7 @@ export function BubbleMenu() {
           return false;
         }
 
-        return (
-          editor.state.selection instanceof TextSelection ||
-          editor.isActive('paragraph')
-        );
+        return true;
       }}
     >
       <ToolbarTextBlocks />

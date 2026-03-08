@@ -17,14 +17,12 @@ type TiptapExtensionProps = {
 };
 
 export const tiptapExtensions = (props?: TiptapExtensionProps) => {
-  let placeholder = '';
-  if (props) {
-    placeholder = props.placeholder
-      ? typeof props.placeholder === 'string'
+  const placeholder =
+    props?.placeholder === false
+      ? ''
+      : typeof props?.placeholder === 'string'
         ? props.placeholder
-        : 'Write something...'
-      : '';
-  }
+        : 'Write something...';
 
   return [
     StarterKit,

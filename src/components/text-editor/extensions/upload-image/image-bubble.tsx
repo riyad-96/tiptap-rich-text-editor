@@ -10,6 +10,7 @@ export function ImageBubbleMenu() {
   return (
     <BubbleMenu
       editor={editor}
+      pluginKey={'image-bubble-menu'}
       shouldShow={({ editor }) => editor.isActive('image')}
       className={
         'tiptap-bubble-menu-inner-element bg-background flex flex-wrap items-center gap-1 rounded-md border shadow-lg'
