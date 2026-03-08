@@ -271,10 +271,10 @@ span.suggestion[data-decoration-content]::before {
   }
 }
 
-.tiptap.ProseMirror-focused p.is-node-empty::before {
+.tiptap p.is-node-empty::before {
   content: attr(data-placeholder);
-  float: left;
   color: oklch(70% 0 0);
+  float: left;
   pointer-events: none;
   height: 0;
   font-style: italic;
