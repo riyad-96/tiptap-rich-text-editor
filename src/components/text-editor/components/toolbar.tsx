@@ -49,6 +49,7 @@ export function ToolBar() {
           variant={editorState.isBlockQuote ? 'secondary' : 'ghost'}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           aria-label="Toggle blockquote"
+          type="button"
         >
           <TextQuoteIcon className="size-4" />
         </Button>
@@ -60,6 +61,7 @@ export function ToolBar() {
           variant={editorState.isCodeBlock ? 'secondary' : 'ghost'}
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           aria-label="Toggle code block"
+          type="button"
         >
           <CodeSquareIcon className="size-4" />
         </Button>

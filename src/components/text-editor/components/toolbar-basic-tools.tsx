@@ -83,6 +83,7 @@ export function ToolbarBasicTools() {
             variant={t.isActive ? 'secondary' : 'ghost'}
             onClick={t.onClick}
             aria-label="Toggle bold"
+            type="button"
           >
             <t.icon className="size-4" />
           </Button>

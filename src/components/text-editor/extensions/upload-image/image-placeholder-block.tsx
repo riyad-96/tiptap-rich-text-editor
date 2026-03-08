@@ -46,6 +46,7 @@ export const ImagePlaceholderBlock = ({
           className="absolute top-2 right-2 rounded-md p-1 opacity-0 group-hover:opacity-100"
           variant={'outline'}
           size="icon-sm"
+          type="button"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -67,6 +68,7 @@ export const ImagePlaceholderBlock = ({
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading}
               size="sm"
+              type="button"
             >
               <Upload className="h-4 w-4" />
               {isUploading ? 'Uploading...' : 'Upload File'}

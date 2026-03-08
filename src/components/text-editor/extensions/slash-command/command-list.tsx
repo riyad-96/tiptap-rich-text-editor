@@ -74,6 +74,7 @@ export const CommandList = forwardRef((props: CommandListProps, ref) => {
             onClick={() => selectItem(index)}
             className="flex h-fit items-center justify-start gap-2 rounded-md px-2 text-start transition-none"
             variant={index === selectedIndex ? 'secondary' : 'ghost'}
+            type="button"
           >
             <span className="flex size-9 shrink-0 items-center justify-center rounded-md border">
               <item.icon className="h-4 w-4" />

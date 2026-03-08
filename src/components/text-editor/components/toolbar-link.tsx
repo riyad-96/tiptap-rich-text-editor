@@ -63,6 +63,7 @@ export function ToolbarLink({ modal = false }: { modal?: boolean }) {
             onClick={() => {
               editor.chain().focus().extendMarkRange('link').unsetLink().run();
             }}
+            type="button"
           >
             <UnlinkIcon />
           </Button>
@@ -70,7 +71,7 @@ export function ToolbarLink({ modal = false }: { modal?: boolean }) {
       ) : (
         <Tooltip content={'Link'} disabled={!editorState.canLink}>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="sm" aria-label="Link">
+            <Button variant="ghost" size="sm" aria-label="Link" type="button">
               <LinkIcon />
             </Button>
           </PopoverTrigger>
@@ -99,6 +100,7 @@ export function ToolbarLink({ modal = false }: { modal?: boolean }) {
               size="sm"
               onClick={handleSetLink}
               disabled={!linkUrl}
+              type="button"
             >
               <CornerDownLeftIcon />
             </Button>
@@ -112,6 +114,7 @@ export function ToolbarLink({ modal = false }: { modal?: boolean }) {
                 window.open(linkUrl, '_blank');
               }}
               disabled={!linkUrl}
+              type="button"
             >
               <ExternalLinkIcon />
             </Button>
@@ -126,6 +129,7 @@ export function ToolbarLink({ modal = false }: { modal?: boolean }) {
                 }
               }}
               disabled={!linkUrl}
+              type="button"
             >
               <TrashIcon />
             </Button>

@@ -23,6 +23,7 @@ export function ImageBubbleMenu() {
           onClick={() => {
             editor.chain().deleteSelection().run();
           }}
+          type="button"
         >
           <XIcon className="size-4" />
         </Button>

@@ -91,6 +91,7 @@ export function ToolbarColorSelector({ modal = false }: { modal?: boolean }) {
             variant={isColorActive ? 'secondary' : 'ghost'}
             size="sm"
             className={cn('flex items-center gap-0.5 pe-1!')}
+            type="button"
           >
             <PaletteIcon />
             <ChevronDownIcon className="size-2.5" />
@@ -129,6 +130,7 @@ export function ToolbarColorSelector({ modal = false }: { modal?: boolean }) {
                     setOpen(false);
                   }}
                   disabled={!editorState.canColor}
+                  type="button"
                 >
                   <span
                     className="grid size-6 place-items-center rounded-sm border"
@@ -177,6 +179,7 @@ export function ToolbarColorSelector({ modal = false }: { modal?: boolean }) {
                     setOpen(false);
                   }}
                   disabled={!editorState.canHighlight}
+                  type="button"
                 >
                   <span
                     className="grid size-6 place-items-center rounded-sm border"

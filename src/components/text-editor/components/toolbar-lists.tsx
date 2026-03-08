@@ -65,6 +65,7 @@ export function ToolbarLists({ modal = false }: { modal?: boolean }) {
             variant={activeList ? 'secondary' : 'ghost'}
             size="sm"
             className={cn('flex items-center gap-0.5 pe-1!')}
+            type="button"
           >
             <span>
               {activeList ? (
@@ -93,6 +94,7 @@ export function ToolbarLists({ modal = false }: { modal?: boolean }) {
             size="sm"
             className={cn('flex justify-start')}
             aria-label={l.text}
+            type="button"
           >
             <span>{<l.icon />}</span>
             <span>{l.text}</span>

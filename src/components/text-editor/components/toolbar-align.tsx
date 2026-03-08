@@ -74,6 +74,7 @@ export function ToolbarAlign() {
               editor.chain().focus().toggleTextAlign(a.align).run()
             }
             aria-label={a.text}
+            type="button"
           >
             <a.icon />
           </Button>

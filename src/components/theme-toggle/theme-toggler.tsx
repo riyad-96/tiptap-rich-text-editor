@@ -18,6 +18,7 @@ export function ThemeToggler() {
       onClick={() => {
         setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
       }}
+      type="button"
     >
       {theme === 'light' ? <MoonIcon /> : <SunIcon />}
     </Button>

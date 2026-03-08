@@ -14,6 +14,7 @@ export function ToolbarImage() {
         onClick={() => {
           editor.chain().focus().insertImagePlaceholder().run();
         }}
+        type="button"
       >
         <ImagePlusIcon />
         <span>Add</span>

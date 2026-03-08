@@ -21,11 +21,11 @@ export function ToolbalUndoRedo() {
     <div className="flex gap-1">
       <Tooltip content="Undo" disabled={!editorState.canUndo}>
         <Button
-          type="button"
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().undo().run()}
           aria-label="Undo"
+          type="button"
         >
           <Undo2Icon className="size-4" />
         </Button>
@@ -33,11 +33,11 @@ export function ToolbalUndoRedo() {
 
       <Tooltip content="Redo" disabled={!editorState.canRedo}>
         <Button
-          type="button"
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().redo().run()}
           aria-label="Redo"
+          type="button"
         >
           <Redo2Icon className="size-4" />
         </Button>

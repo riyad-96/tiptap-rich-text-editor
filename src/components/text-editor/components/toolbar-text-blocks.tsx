@@ -93,6 +93,7 @@ export function ToolbarTextBlocks({ modal = false }: { modal?: boolean }) {
             variant={activeBlock ? 'secondary' : 'ghost'}
             size="sm"
             className={cn('flex items-center gap-0.5 pe-1!')}
+            type="button"
           >
             <span>
               {activeBlock ? (
@@ -121,6 +122,7 @@ export function ToolbarTextBlocks({ modal = false }: { modal?: boolean }) {
             size="sm"
             className={cn('flex justify-start')}
             aria-label={b.text}
+            type="button"
           >
             <span>{<b.icon />}</span>
             <span>{b.text}</span>

@@ -26,6 +26,7 @@ export function ToolbarSupSubscript() {
           size="sm"
           variant={editorState.isSup ? 'secondary' : 'ghost'}
           onClick={() => editor.chain().focus().toggleSuperscript().run()}
+          type="button"
         >
           <SuperscriptIcon />
         </Button>
@@ -36,6 +37,7 @@ export function ToolbarSupSubscript() {
           size="sm"
           variant={editorState.isSub ? 'secondary' : 'ghost'}
           onClick={() => editor.chain().focus().toggleSubscript().run()}
+          type="button"
         >
           <SubscriptIcon />
         </Button>
