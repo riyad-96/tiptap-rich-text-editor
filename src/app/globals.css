@@ -355,7 +355,6 @@ span.suggestion[data-decoration-content]::before {
   cursor: col-resize;
 }
 
-/* Add a ring around the image when selected */
 .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
   outline: 2px solid var(--resize-handle-bg);
 
@@ -364,7 +363,6 @@ span.suggestion[data-decoration-content]::before {
   }
 }
 
-/* The Drag Handle Container */
 .tiptap-global-drag-handler-container {
   cursor: grab;
   transition: top 0.2s ease;
@@ -375,12 +373,7 @@ span.suggestion[data-decoration-content]::before {
   opacity: 0.6;
 }
 
-.tiptap.ProseMirror + div:has(.tiptap-global-drag-handler-container) {
-  opacity: 0;
-  transition: opacity 200ms;
-}
-
-.tiptap.ProseMirror:hover + div:has(.tiptap-global-drag-handler-container) {
+.tiptap.ProseMirror:hover .tiptap-global-drag-handler-container {
   opacity: 1;
 }
 
