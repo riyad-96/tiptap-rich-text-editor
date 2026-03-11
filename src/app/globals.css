@@ -326,7 +326,19 @@ span.suggestion[data-decoration-content]::before {
   width: fit-content;
 }
 
-.tiptap.tiptap-preview img[data-align='right'] {
+.tiptap-preview img[data-align='left'] {
+  display: block;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.tiptap-preview img[data-align='center'] {
+  display: block;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.tiptap-preview img[data-align='right'] {
   display: block;
   margin-inline-start: auto;
   margin-inline-end: 0;
