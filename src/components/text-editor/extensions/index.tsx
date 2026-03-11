@@ -6,7 +6,7 @@ import { Color, TextStyle } from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
-import Image from '@tiptap/extension-image';
+import { CustomImage } from './upload-image/custom-image';
 import DragHandle from '@tiptap/extension-drag-handle';
 
 import { SlashCommand } from './slash-command';
@@ -42,17 +42,17 @@ export const tiptapExtensions = (props?: TiptapExtensionProps) => {
       showOnlyCurrent: true,
       emptyNodeClass: 'is-node-empty',
     }),
-    Image.configure({
+    CustomImage.configure({
       allowBase64: true,
+      HTMLAttributes: {
+        class: 'rounded-lg',
+      },
       resize: {
         enabled: true,
         directions: ['left', 'right'],
         minWidth: 50,
         minHeight: 50,
         alwaysPreserveAspectRatio: true,
-      },
-      HTMLAttributes: {
-        class: 'rounded-lg',
       },
     }),
     ImagePlaceholder,

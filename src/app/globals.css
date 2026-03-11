@@ -302,14 +302,34 @@ span.suggestion[data-decoration-content]::before {
 
 .tiptap [data-resize-container] {
   margin-block: 2rem;
-  max-width: fit-content;
+  display: flex;
+  width: 100%;
 
   --resize-handle-bg: oklch(73.155% 0.14431 250.444);
   --image-resize-radius: 10px;
 }
 
+.tiptap [data-resize-container][data-align='left'] {
+  justify-content: flex-start;
+}
+
+.tiptap [data-resize-container][data-align='center'] {
+  justify-content: center;
+}
+
+.tiptap [data-resize-container][data-align='right'] {
+  justify-content: flex-end;
+}
+
 .tiptap [data-resize-wrapper] {
   border-radius: var(--image-resize-radius);
+  width: fit-content;
+}
+
+.tiptap.tiptap-preview img[data-align='right'] {
+  display: block;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
 }
 
 .tiptap [data-resize-wrapper]::before {
