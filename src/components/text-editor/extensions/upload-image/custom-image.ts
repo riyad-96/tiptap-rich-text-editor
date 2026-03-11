@@ -9,6 +9,10 @@ declare module '@tiptap/core' {
        */
       setImageAlign: (align: 'left' | 'center' | 'right') => ReturnType;
       /**
+       * Set the image to full width
+       */
+      setImageFullWidth: () => ReturnType;
+      /**
        * Update a data attribute on the image
        */
       updateImageDataAttribute: (
@@ -61,6 +65,14 @@ export const CustomImage = Image.extend({
         (align) =>
         ({ commands }) => {
           return commands.updateAttributes('image', { align });
+        },
+      setImageFullWidth:
+        () =>
+        ({ commands }) => {
+          return commands.updateAttributes('image', {
+            width: '100%',
+            height: 'auto',
+          });
         },
       updateImageDataAttribute:
         (attributes) =>

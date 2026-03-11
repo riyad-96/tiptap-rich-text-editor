@@ -5,6 +5,7 @@ import {
   AlignCenterIcon,
   AlignLeftIcon,
   AlignRightIcon,
+  MaximizeIcon,
   XIcon,
 } from 'lucide-react';
 import { Tooltip } from '../../components/tooltip';
@@ -19,6 +20,7 @@ export function ImageBubbleMenu() {
       isAlignLeft: ctx.editor.isActive('image', { align: 'left' }),
       isAlignCenter: ctx.editor.isActive('image', { align: 'center' }),
       isAlignRight: ctx.editor.isActive('image', { align: 'right' }),
+      isFullWidth: ctx.editor.isActive('image', { width: '100%' }),
     }),
   });
 
@@ -69,6 +71,17 @@ export function ImageBubbleMenu() {
       </Tooltip>
 
       <div className="bg-border mx-1 h-4 w-px" />
+
+      <Tooltip content="Full Width" side="top">
+        <Button
+          variant={editorState.isFullWidth ? 'secondary' : 'ghost'}
+          size="sm"
+          onClick={() => editor.chain().focus().setImageFullWidth().run()}
+          type="button"
+        >
+          <MaximizeIcon className="size-4" />
+        </Button>
+      </Tooltip>
 
       <Tooltip content="Remove image" side="top">
         <Button
