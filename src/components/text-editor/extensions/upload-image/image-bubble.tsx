@@ -25,7 +25,8 @@ export function ImageBubbleMenu() {
   });
 
   const setAlign = (align: 'left' | 'center' | 'right') => {
-    editor.chain().focus().setImageAlign(align).run();
+    const isAlreadyAligned = editor.isActive('image', { align });
+    editor.chain().focus().setImageAlign(isAlreadyAligned ? null : align).run();
   };
 
   return (

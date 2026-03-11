@@ -27,7 +27,7 @@ export const ImagePlaceholderBlock = ({
         .focus()
         .insertContentAt(getPos() as number, {
           type: 'image',
-          attrs: { src: url, alt: file.name },
+          attrs: { src: url, alt: file.name, width: '100%', height: 'auto' },
         })
         .run();
       deleteNode();

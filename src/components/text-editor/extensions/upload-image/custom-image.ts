@@ -7,7 +7,7 @@ declare module '@tiptap/core' {
       /**
        * Set the image alignment
        */
-      setImageAlign: (align: 'left' | 'center' | 'right') => ReturnType;
+        setImageAlign: (align: 'left' | 'center' | 'right' | null) => ReturnType;
       /**
        * Set the image to full width
        */
@@ -29,27 +29,30 @@ export const CustomImage = Image.extend({
     return {
       ...this.parent?.(),
       width: {
-        default: null,
+        default: '100%',
         parseHTML: (element) => element.getAttribute('width'),
         renderHTML: (attributes) => {
+          if (!attributes.width) return {};
           return {
             width: attributes.width,
           };
         },
       },
       height: {
-        default: null,
+        default: 'auto',
         parseHTML: (element) => element.getAttribute('height'),
         renderHTML: (attributes) => {
+          if (!attributes.height) return {};
           return {
             height: attributes.height,
           };
         },
       },
       align: {
-        default: 'center',
-        parseHTML: (element) => element.getAttribute('data-align') || 'center',
+        default: null,
+        parseHTML: (element) => element.getAttribute('data-align'),
         renderHTML: (attributes) => {
+          if (!attributes.align) return {};
           return {
             'data-align': attributes.align,
           };
@@ -72,6 +75,7 @@ export const CustomImage = Image.extend({
           return commands.updateAttributes('image', {
             width: '100%',
             height: 'auto',
+            align: null,
           });
         },
       updateImageDataAttribute:
@@ -96,7 +100,9 @@ export const CustomImage = Image.extend({
 
       const container = document.createElement('div');
       container.setAttribute('data-resize-container', '');
-      container.setAttribute('data-align', align || 'center');
+      if (align) {
+        container.setAttribute('data-align', align);
+      }
 
       const wrapper = document.createElement('div');
       wrapper.setAttribute('data-resize-wrapper', '');
@@ -109,7 +115,11 @@ export const CustomImage = Image.extend({
 
       if (width) {
         img.setAttribute('width', width);
-        wrapper.style.width = 'auto'; // Let the image dictate the width
+        if (width === '100%') {
+          wrapper.style.width = '100%';
+        } else {
+          wrapper.style.width = 'auto'; // Let the image dictate the width
+        }
       }
       if (height) {
         img.setAttribute('height', height);
@@ -163,6 +173,7 @@ export const CustomImage = Image.extend({
             'height',
             Math.round(newWidth * aspectRatio).toString(),
           );
+          wrapper.style.width = 'auto';
         };
 
         const onMouseUp = () => {
