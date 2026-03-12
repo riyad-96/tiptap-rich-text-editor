@@ -24,10 +24,11 @@ import {
   SquareCodeIcon,
   QuoteIcon,
   ImagePlusIcon,
+  SeparatorHorizontalIcon,
 } from 'lucide-react';
 
 import { CommandList, CommandListProps } from './command-list';
-import { SuggestionItem } from '../../types/slash-command';
+import { SuggestionItem } from '../../../types/slash-command';
 
 export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
   items: ({ query }) => {
@@ -269,6 +270,15 @@ export const suggestion: Omit<SuggestionOptions<SuggestionItem>, 'editor'> = {
             .deleteRange(range)
             .toggleTextAlign('justify')
             .run();
+        },
+      },
+      {
+        title: 'Divider',
+        description: 'Horizontal line.',
+        icon: SeparatorHorizontalIcon,
+        search_term: ['divider', 'separator', 'line', 'break', 'hr'],
+        command: ({ editor, range }) => {
+          editor.chain().focus().deleteRange(range).setHorizontalRule().run();
         },
       },
     ];

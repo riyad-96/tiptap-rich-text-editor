@@ -3,14 +3,17 @@ import { useEditorState } from '@tiptap/react';
 import { BubbleMenu as TiptapBubbleMenu } from '@tiptap/react/menus';
 
 import { Toggle } from '@/components/ui';
-
-import { ToolbarSeparator } from './toolbar-separator';
-import { ToolbarTextBlocks } from './toolbar-text-blocks';
-import { ToolbarLists } from './toolbar-lists';
-import { ToolbarColorSelector } from './toolbar-color-selector';
-import { ToolbarLink } from './toolbar-link';
-import { ToolbarBasicTools } from './toolbar-basic-tools';
-import { useEditorProvider } from '../hooks/use-editor-provider';
+import { ToolbarLink } from '../toolbar-tools/toolbar-link';
+import { ToolbarSeparator } from '../toolbar-tools/toolbar-separator';
+import { ToolbarColorSelector } from '../toolbar-tools/toolbar-color-selector';
+import { ToolbarCode } from '../toolbar-tools/toolbar-code';
+import { ToolbarStrike } from '../toolbar-tools/toolbar-strike';
+import { ToolbarUnderline } from '../toolbar-tools/toolbar-underline';
+import { ToolbarItalic } from '../toolbar-tools/toolbar-italic';
+import { ToolbarBold } from '../toolbar-tools/toolbar-bold';
+import { ToolbarLists } from '../toolbar-tools/toolbar-lists';
+import { ToolbarTextBlocks } from '../toolbar-tools/toolbar-text-blocks';
+import { useEditorProvider } from '../../hooks/use-editor-provider';
 
 export function BubbleMenu() {
   const { editor, isBubbleMenuHidden } = useEditorProvider();
@@ -75,7 +78,11 @@ export function BubbleMenu() {
 
       <ToolbarSeparator />
 
-      <ToolbarBasicTools />
+      <ToolbarBold />
+      <ToolbarItalic />
+      <ToolbarUnderline />
+      <ToolbarStrike />
+      <ToolbarCode />
 
       <ToolbarSeparator />
 

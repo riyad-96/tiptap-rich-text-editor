@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 
-import { BubbleMenu } from './components/bubble-menu';
+import { BubbleMenu } from './components/menu/bubble-menu';
 import { ToolBar } from './components/toolbar';
 import { tiptapExtensions } from './extensions';
 import { TooltipProvider } from '../ui/tooltip';
@@ -11,7 +11,7 @@ import { tiptapStyleClasses } from './style';
 import { editorContext } from './context/editor-context';
 import { useEditorProvider } from './hooks/use-editor-provider';
 import { TextEditorProps } from './types/text-editor';
-import { ImageBubbleMenu } from './extensions/upload-image2/image-bubble';
+import { ImageBubbleMenu } from './components/menu/image-bubble-menu';
 
 export function TextEditor({
   hideBubbleMenuOnTouch = true,

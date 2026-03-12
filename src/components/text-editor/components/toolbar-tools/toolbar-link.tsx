@@ -16,8 +16,8 @@ import {
 } from '@/components/ui/popover';
 
 import { ToolbarSeparator } from './toolbar-separator';
-import { Tooltip } from './tooltip';
-import { useEditorProvider } from '../hooks/use-editor-provider';
+import { Tooltip } from '../tooltip';
+import { useEditorProvider } from '../../hooks/use-editor-provider';
 
 export function ToolbarLink({ modal = false }: { modal?: boolean }) {
   const [linkUrl, setLinkUrl] = useState('');

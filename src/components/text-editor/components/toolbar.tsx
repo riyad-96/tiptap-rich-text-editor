@@ -1,75 +1,51 @@
-import { useEditorState } from '@tiptap/react';
-import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-
-import { ToolbarLink } from './toolbar-link';
-import { ToolbarTextBlocks } from './toolbar-text-blocks';
-import { ToolbarSeparator } from './toolbar-separator';
-import { ToolbarLists } from './toolbar-lists';
-import { ToolbalUndoRedo } from './toolbar-undo-redo';
-import { ToolbarColorSelector } from './toolbar-color-selector';
-import { ToolbarAlign } from './toolbar-align';
-import { ToolbarSupSubscript } from './toolbar-super-sub-script';
-import { ToolbarBasicTools } from './toolbar-basic-tools';
-import { useEditorProvider } from '../hooks/use-editor-provider';
-import { Tooltip } from './tooltip';
-import { ToolbarImage } from './toolbar-image';
+import { ToolbarLink } from './toolbar-tools/toolbar-link';
+import { ToolbarTextBlocks } from './toolbar-tools/toolbar-text-blocks';
+import { ToolbarSeparator } from './toolbar-tools/toolbar-separator';
+import { ToolbarLists } from './toolbar-tools/toolbar-lists';
+import { ToolbarColorSelector } from './toolbar-tools/toolbar-color-selector';
+import { ToolbarImage } from './toolbar-tools/toolbar-image';
+import { ToolbarUndo } from './toolbar-tools/toolbar-undo';
+import { ToolbarRedo } from './toolbar-tools/toolbar-redo';
+import { ToolbarBlockquote } from './toolbar-tools/toolbar-blockquote';
+import { ToolbarCodeblock } from './toolbar-tools/toolbar-codeblock';
+import { ToolbarBold } from './toolbar-tools/toolbar-bold';
+import { ToolbarItalic } from './toolbar-tools/toolbar-italic';
+import { ToolbarUnderline } from './toolbar-tools/toolbar-underline';
+import { ToolbarStrike } from './toolbar-tools/toolbar-strike';
+import { ToolbarCode } from './toolbar-tools/toolbar-code';
+import { ToolbarAlignLeft } from './toolbar-tools/toolbar-align-left';
+import { ToolbarAlignCenter } from './toolbar-tools/toolbar-align-center';
+import { ToolbarAlignRight } from './toolbar-tools/toolbar-align-right';
+import { ToolbarAlignJustify } from './toolbar-tools/toolbar-align-justify';
+import { ToolbarHorizontalRule } from './toolbar-tools/toolbar-horizontal-rule';
+import { ToolbarSuperscript } from './toolbar-tools/toolbar-superscript';
+import { ToolbarSubscript } from './toolbar-tools/toolbar-subscript';
 
 export function ToolBar() {
-  const { editor } = useEditorProvider();
-
-  const editorState = useEditorState({
-    editor,
-    selector: (ctx) => {
-      return {
-        isCodeBlock: ctx.editor.isActive('codeBlock'),
-        isBlockQuote: ctx.editor.isActive('blockquote'),
-        canBlockQuote: ctx.editor.can().toggleBlockquote(),
-      };
-    },
-  });
-
   return (
     <div
       className={
         'bg-background flex min-w-0 items-center gap-1 overflow-x-auto border-b p-2'
       }
     >
-      <ToolbalUndoRedo />
+      <ToolbarUndo />
+      <ToolbarRedo />
 
       <ToolbarSeparator />
 
       <ToolbarTextBlocks />
       <ToolbarLists />
 
-      <Tooltip content={'Blockquote'} disabled={!editorState.canBlockQuote}>
-        <Button
-          size="sm"
-          variant={editorState.isBlockQuote ? 'secondary' : 'ghost'}
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          aria-label="Toggle blockquote"
-          type="button"
-        >
-          <TextQuoteIcon className="size-4" />
-        </Button>
-      </Tooltip>
-
-      <Tooltip content={'Blockquote'}>
-        <Button
-          size="sm"
-          variant={editorState.isCodeBlock ? 'secondary' : 'ghost'}
-          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          aria-label="Toggle code block"
-          type="button"
-        >
-          <CodeSquareIcon className="size-4" />
-        </Button>
-      </Tooltip>
+      <ToolbarBlockquote />
+      <ToolbarCodeblock />
 
       <ToolbarSeparator />
 
-      <ToolbarBasicTools />
+      <ToolbarBold />
+      <ToolbarItalic />
+      <ToolbarUnderline />
+      <ToolbarStrike />
+      <ToolbarCode />
 
       <ToolbarSeparator />
 
@@ -81,11 +57,16 @@ export function ToolBar() {
 
       <ToolbarSeparator />
 
-      <ToolbarAlign />
+      <ToolbarAlignLeft />
+      <ToolbarAlignCenter />
+      <ToolbarAlignRight />
+      <ToolbarAlignJustify />
+      <ToolbarHorizontalRule />
 
       <ToolbarSeparator />
 
-      <ToolbarSupSubscript />
+      <ToolbarSuperscript />
+      <ToolbarSubscript />
 
       <ToolbarSeparator />
 

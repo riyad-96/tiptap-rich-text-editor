@@ -1,5 +1,6 @@
+import { useEditorState } from '@tiptap/react';
 import { BubbleMenu } from '@tiptap/react/menus';
-import { useEditorProvider } from '../../hooks/use-editor-provider';
+
 import { Button } from '@/components/ui/button';
 import {
   AlignCenterIcon,
@@ -8,8 +9,9 @@ import {
   MaximizeIcon,
   XIcon,
 } from 'lucide-react';
-import { Tooltip } from '../../components/tooltip';
-import { useEditorState } from '@tiptap/react';
+
+import { useEditorProvider } from '../../hooks/use-editor-provider';
+import { Tooltip } from '../tooltip';
 
 export function ImageBubbleMenu() {
   const { editor } = useEditorProvider();
@@ -26,7 +28,11 @@ export function ImageBubbleMenu() {
 
   const setAlign = (align: 'left' | 'center' | 'right') => {
     const isAlreadyAligned = editor.isActive('image', { align });
-    editor.chain().focus().setImageAlign(isAlreadyAligned ? null : align).run();
+    editor
+      .chain()
+      .focus()
+      .setImageAlign(isAlreadyAligned ? null : align)
+      .run();
   };
 
   return (

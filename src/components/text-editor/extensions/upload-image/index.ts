@@ -1,5 +1,5 @@
 import { Node, ReactNodeViewRenderer } from '@tiptap/react';
-import { ImagePlaceholderBlock } from './image-placeholder-block';
+import { ImagePlaceholderBlock } from '../../components/extension/upload-image/image-placeholder-block';
 
 // 1. Define the interface for your custom commands
 declare module '@tiptap/core' {

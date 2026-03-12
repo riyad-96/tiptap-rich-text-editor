@@ -8,7 +8,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 
-import { SuggestionItem } from '../../types/slash-command';
+import { SuggestionItem } from '../../../types/slash-command';
 
 export interface CommandListProps {
   items: SuggestionItem[];

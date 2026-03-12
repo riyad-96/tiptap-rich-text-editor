@@ -19,8 +19,8 @@ import {
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 
-import { useEditorProvider } from '../hooks/use-editor-provider';
-import { Tooltip } from './tooltip';
+import { useEditorProvider } from '../../hooks/use-editor-provider';
+import { Tooltip } from '../tooltip';
 
 export function ToolbarTextBlocks({ modal = false }: { modal?: boolean }) {
   const [open, setOpen] = useState(false);

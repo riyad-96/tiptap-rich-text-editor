@@ -6,11 +6,11 @@ import { Color, TextStyle } from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
-import { CustomImage } from './upload-image2/custom-image';
+import { CustomImage } from './upload-image/custom-image';
 import DragHandle from '@tiptap/extension-drag-handle';
 
 import { SlashCommand } from './slash-command';
-import { ImagePlaceholder } from './upload-image2';
+import { ImagePlaceholder } from './upload-image';
 
 type TiptapExtensionProps = {
   placeholder?: string | boolean;

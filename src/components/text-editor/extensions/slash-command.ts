@@ -2,7 +2,7 @@
 import { Extension } from '@tiptap/core';
 import Suggestion from '@tiptap/suggestion';
 
-import { suggestion } from './suggestions';
+import { suggestion } from '../components/extension/slash-command/suggestions';
 
 export const SlashCommand = Extension.create({
   name: 'slashCommand',

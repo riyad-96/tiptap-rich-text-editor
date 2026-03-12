@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { useEditorProvider } from '../hooks/use-editor-provider';
+import { useEditorProvider } from '../../hooks/use-editor-provider';
 import { ImagePlusIcon } from 'lucide-react';
-import { Tooltip } from './tooltip';
+import { Tooltip } from '../tooltip';
 
 export function ToolbarImage() {
   const { editor } = useEditorProvider();
