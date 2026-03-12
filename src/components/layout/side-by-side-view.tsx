@@ -1,20 +1,31 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { TextEditor } from '../text-editor/text-editor';
 import { Viewer } from '../text-editor/viewer';
-import { useDebounce } from 'kitzo';
+import { useDebounce, useLocalStorage } from 'kitzo';
 import type { JSONContent } from '@tiptap/core';
 
 export function SideBySideView() {
-  const [content, setContent] = useState<JSONContent | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const [content, setContent] = useLocalStorage<JSONContent | null>(
+    'text-editor-content',
+    null,
+    {
+      onMount(value) {
+        setIsMounted(true);
+        console.log(value);
+      },
+    },
+  );
   const debouncedContent = useDebounce(content, 200);
 
   // handle resize
   const leftPanelRef = useRef<HTMLDivElement | null>(null);
   const resizeBarRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!leftPanelRef.current || !resizeBarRef.current) return;
 
     const leftPanel = leftPanelRef.current;
@@ -55,6 +66,8 @@ export function SideBySideView() {
     };
   }, []);
 
+  if (!isMounted) return <></>;
+
   return (
     <div className="flex min-h-0 min-w-0">
       <div ref={leftPanelRef} className="w-1/2">
@@ -63,6 +76,7 @@ export function SideBySideView() {
             setContent(editor.getJSON());
           }}
           placeholder="Write, type '/' for commands..."
+          content={content}
         />
       </div>
 

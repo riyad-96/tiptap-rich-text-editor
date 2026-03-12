@@ -19,6 +19,7 @@ export function TextEditor({
   onChange,
   placeholder,
   hideTooltip = false,
+  ...rest
 }: TextEditorProps) {
   const editor = useEditor({
     extensions: tiptapExtensions({ placeholder }),
@@ -29,10 +30,10 @@ export function TextEditor({
       },
     },
     onMount: (props) => {
-      if (typeof onChange === 'function') onChange(props.editor);
+      if (typeof rest.onMount === 'function') rest.onMount(props.editor);
     },
-    onUpdate: (v) => {
-      if (typeof onChange == 'function') onChange(v.editor);
+    onUpdate: (props) => {
+      if (typeof onChange == 'function') onChange(props.editor);
     },
     content,
   });
