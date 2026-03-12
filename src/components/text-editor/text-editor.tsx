@@ -11,7 +11,7 @@ import { tiptapStyleClasses } from './style';
 import { editorContext } from './context/editor-context';
 import { useEditorProvider } from './hooks/use-editor-provider';
 import { TextEditorProps } from './types/text-editor';
-import { ImageBubbleMenu } from './extensions/upload-image/image-bubble';
+import { ImageBubbleMenu } from './extensions/upload-image2/image-bubble';
 
 export function TextEditor({
   hideBubbleMenuOnTouch = true,
