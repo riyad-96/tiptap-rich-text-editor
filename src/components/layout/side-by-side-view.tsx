@@ -13,19 +13,20 @@ export function SideBySideView() {
     'text-editor-content',
     null,
     {
-      onMount(value) {
+      onMount: () => {
         setIsMounted(true);
-        console.log(value);
       },
     },
   );
   const debouncedContent = useDebounce(content, 200);
 
   // handle resize
-  const leftPanelRef = useRef<HTMLDivElement | null>(null);
-  const resizeBarRef = useRef<HTMLDivElement | null>(null);
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const resizeBarRef = useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    if (!isMounted) return;
+
     if (!leftPanelRef.current || !resizeBarRef.current) return;
 
     const leftPanel = leftPanelRef.current;
@@ -64,7 +65,7 @@ export function SideBySideView() {
         resizeBar.removeEventListener('mousedown', startResize);
       }
     };
-  }, []);
+  }, [isMounted]);
 
   if (!isMounted) return <></>;
 
