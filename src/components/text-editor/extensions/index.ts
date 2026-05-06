@@ -1,3 +1,4 @@
+import { Extensions } from '@tiptap/react';
 import { TaskItem, TaskList } from '@tiptap/extension-list';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
@@ -12,11 +13,56 @@ import DragHandle from '@tiptap/extension-drag-handle';
 import { SlashCommand } from './slash-command';
 import { ImagePlaceholder } from './upload-image';
 
+export { SlashCommand } from './slash-command';
+export { ImagePlaceholder } from './upload-image';
+export { CustomImage } from './upload-image/custom-image';
+
 type TiptapExtensionProps = {
   placeholder?: string | boolean;
 };
 
-export const tiptapExtensions = (props?: TiptapExtensionProps) => {
+export const defaultExtensions: Extensions = [
+  StarterKit,
+  Highlight.configure({ multicolor: true }),
+  TaskList,
+  TaskItem,
+  TextStyle,
+  Color,
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
+  }),
+  Superscript,
+  Subscript,
+  SlashCommand,
+  CustomImage.configure({
+    allowBase64: true,
+    HTMLAttributes: {
+      class: 'rounded-lg',
+    },
+    resize: {
+      enabled: true,
+      directions: ['left', 'right'],
+      minWidth: 50,
+      minHeight: 50,
+      alwaysPreserveAspectRatio: true,
+    },
+  }),
+  ImagePlaceholder,
+  DragHandle.configure({
+    render: () => {
+      const element = document.createElement('div');
+      element.classList.add('tiptap-global-drag-handler-container');
+
+      element.innerHTML = `
+<svg class="tiptap-global-drag-handler" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
+</svg>`;
+      return element;
+    },
+  }),
+];
+
+export const tiptapExtensions = (props?: TiptapExtensionProps): Extensions => {
   const placeholder =
     props?.placeholder === false
       ? ''
@@ -25,48 +71,11 @@ export const tiptapExtensions = (props?: TiptapExtensionProps) => {
         : 'Write something...';
 
   return [
-    StarterKit,
-    Highlight.configure({ multicolor: true }),
-    TaskList,
-    TaskItem,
-    TextStyle,
-    Color,
-    TextAlign.configure({
-      types: ['heading', 'paragraph'],
-    }),
-    Superscript,
-    Subscript,
-    SlashCommand,
+    ...defaultExtensions,
     Placeholder.configure({
       placeholder,
       showOnlyCurrent: true,
       emptyNodeClass: 'is-node-empty',
-    }),
-    CustomImage.configure({
-      allowBase64: true,
-      HTMLAttributes: {
-        class: 'rounded-lg',
-      },
-      resize: {
-        enabled: true,
-        directions: ['left', 'right'],
-        minWidth: 50,
-        minHeight: 50,
-        alwaysPreserveAspectRatio: true,
-      },
-    }),
-    ImagePlaceholder,
-    DragHandle.configure({
-      render: () => {
-        const element = document.createElement('div');
-        element.classList.add('tiptap-global-drag-handler-container');
-
-        element.innerHTML = `
-<svg class="tiptap-global-drag-handler" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
-</svg>`;
-        return element;
-      },
     }),
   ];
 };

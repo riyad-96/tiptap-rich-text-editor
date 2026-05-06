@@ -1,28 +1,38 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
+import React, { useState, ReactNode, ComponentPropsWithoutRef } from 'react';
+import {
+  useEditor,
+  EditorContent as TiptapEditorContent,
+  Editor,
+  Extensions,
+} from '@tiptap/react';
 
-import { BubbleMenu } from './components/menu/bubble-menu';
-import { ToolBar } from './components/toolbar';
+import { BubbleMenu, ToolBar, ImageBubbleMenu } from './components';
 import { tiptapExtensions } from './extensions';
 import { TooltipProvider } from '../ui/tooltip';
 import { tiptapStyleClasses } from './style';
 import { editorContext } from './context/editor-context';
 import { useEditorProvider } from './hooks/use-editor-provider';
 import { TextEditorProps } from './types/text-editor';
-import { ImageBubbleMenu } from './components/menu/image-bubble-menu';
 
-export function TextEditor({
-  hideBubbleMenuOnTouch = true,
+export interface EditorRootProps extends TextEditorProps {
+  children: ReactNode;
+  extensions?: Extensions;
+}
+
+export function EditorRoot({
+  children,
   content,
   onChange,
+  onMount,
   placeholder,
+  extensions,
+  hideBubbleMenuOnTouch = true,
   hideTooltip = false,
-  ...rest
-}: TextEditorProps) {
+}: EditorRootProps) {
   const editor = useEditor({
-    extensions: tiptapExtensions({ placeholder }),
+    extensions: extensions || tiptapExtensions({ placeholder }),
     immediatelyRender: false,
     editorProps: {
       attributes: {
@@ -30,7 +40,7 @@ export function TextEditor({
       },
     },
     onMount: (props) => {
-      if (typeof rest.onMount === 'function') rest.onMount(props.editor);
+      if (typeof onMount === 'function') onMount(props.editor);
     },
     onUpdate: (props) => {
       if (typeof onChange == 'function') onChange(props.editor);
@@ -40,14 +50,13 @@ export function TextEditor({
 
   const [isBubbleMenuHidden, setIsBubbleMenuHidden] = useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (hideBubbleMenuOnTouch) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsBubbleMenuHidden(window.matchMedia('(pointer: coarse)').matches);
     }
   }, [hideBubbleMenuOnTouch]);
 
-  if (!editor) return <></>;
+  if (!editor) return null;
 
   return (
     <editorContext.Provider
@@ -57,28 +66,54 @@ export function TextEditor({
         hideTooltip,
       }}
     >
-      <TooltipProvider>
-        <EditorContentWrapper />
-      </TooltipProvider>
+      {children}
     </editorContext.Provider>
   );
 }
 
-function EditorContentWrapper() {
-  const { editor } = useEditorProvider();
+export interface EditorContentProps extends Omit<
+  ComponentPropsWithoutRef<typeof TiptapEditorContent>,
+  'editor'
+> {
+  className?: string;
+  children?: ReactNode;
+  editor?: Editor | null;
+}
+
+export function EditorContent({
+  className,
+  children,
+  editor: propsEditor,
+  ...props
+}: EditorContentProps) {
+  const { editor: contextEditor } = useEditorProvider();
+  const editor = propsEditor || contextEditor;
 
   return (
-    <>
-      <EditorContent
-        editor={editor}
-        className="text-primary grid h-full grid-rows-[auto_1fr] overflow-y-auto"
-        spellCheck={false}
-      >
-        <ToolBar />
-      </EditorContent>
+    <TiptapEditorContent
+      editor={editor}
+      className={
+        className ||
+        'text-primary grid h-full grid-rows-[auto_1fr] overflow-y-auto'
+      }
+      spellCheck={false}
+      {...props}
+    >
+      {children}
+    </TiptapEditorContent>
+  );
+}
 
-      <BubbleMenu />
-      <ImageBubbleMenu />
-    </>
+export function TextEditor(props: TextEditorProps) {
+  return (
+    <EditorRoot {...props}>
+      <TooltipProvider>
+        <EditorContent>
+          <ToolBar />
+        </EditorContent>
+        <BubbleMenu />
+        <ImageBubbleMenu />
+      </TooltipProvider>
+    </EditorRoot>
   );
 }

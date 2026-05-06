@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { ToolbarLink } from './toolbar-tools/toolbar-link';
 import { ToolbarTextBlocks } from './toolbar-tools/toolbar-text-blocks';
 import { ToolbarSeparator } from './toolbar-tools/toolbar-separator';
@@ -21,56 +22,60 @@ import { ToolbarHorizontalRule } from './toolbar-tools/toolbar-horizontal-rule';
 import { ToolbarSuperscript } from './toolbar-tools/toolbar-superscript';
 import { ToolbarSubscript } from './toolbar-tools/toolbar-subscript';
 
-export function ToolBar() {
+export function ToolBar({ children }: { children?: ReactNode }) {
   return (
     <div
       className={
         'bg-background flex min-w-0 items-center gap-1 overflow-x-auto border-b p-2'
       }
     >
-      <ToolbarUndo />
-      <ToolbarRedo />
+      {children || (
+        <>
+          <ToolbarUndo />
+          <ToolbarRedo />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarTextBlocks />
-      <ToolbarLists />
+          <ToolbarTextBlocks />
+          <ToolbarLists />
 
-      <ToolbarBlockquote />
-      <ToolbarCodeblock />
+          <ToolbarBlockquote />
+          <ToolbarCodeblock />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarBold />
-      <ToolbarItalic />
-      <ToolbarUnderline />
-      <ToolbarStrike />
-      <ToolbarCode />
+          <ToolbarBold />
+          <ToolbarItalic />
+          <ToolbarUnderline />
+          <ToolbarStrike />
+          <ToolbarCode />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarColorSelector />
+          <ToolbarColorSelector />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarLink />
+          <ToolbarLink />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarAlignLeft />
-      <ToolbarAlignCenter />
-      <ToolbarAlignRight />
-      <ToolbarAlignJustify />
-      <ToolbarHorizontalRule />
+          <ToolbarAlignLeft />
+          <ToolbarAlignCenter />
+          <ToolbarAlignRight />
+          <ToolbarAlignJustify />
+          <ToolbarHorizontalRule />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarSuperscript />
-      <ToolbarSubscript />
+          <ToolbarSuperscript />
+          <ToolbarSubscript />
 
-      <ToolbarSeparator />
+          <ToolbarSeparator />
 
-      <ToolbarImage />
+          <ToolbarImage />
+        </>
+      )}
     </div>
   );
 }
