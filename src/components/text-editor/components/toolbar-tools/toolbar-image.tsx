@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '../../ui/button';
 import { useEditorProvider } from '../../hooks/use-editor-provider';
 import { ImagePlusIcon } from 'lucide-react';
 import { Tooltip } from '../tooltip';

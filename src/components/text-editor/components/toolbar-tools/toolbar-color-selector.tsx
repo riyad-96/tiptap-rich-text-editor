@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useEditorState } from '@tiptap/react';
 import { ChevronDownIcon, PaletteIcon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '../../ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
+} from '../../ui/popover';
+import { cn } from '../../lib/utils';
 
 import { useEditorProvider } from '../../hooks/use-editor-provider';
 import { Tooltip } from '../tooltip';

@@ -2,7 +2,7 @@ import { CodeSquareIcon, TextQuoteIcon } from 'lucide-react';
 import { useEditorState } from '@tiptap/react';
 import { BubbleMenu as TiptapBubbleMenu } from '@tiptap/react/menus';
 
-import { Toggle } from '@/components/ui';
+import { Toggle } from '../../ui';
 import { ToolbarLink } from '../toolbar-tools/toolbar-link';
 import { ToolbarSeparator } from '../toolbar-tools/toolbar-separator';
 import { ToolbarColorSelector } from '../toolbar-tools/toolbar-color-selector';

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { NodeViewWrapper, type NodeViewProps } from '@tiptap/react';
 import { ImageIcon, Upload, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../../../ui/button';
 
 export const ImagePlaceholderBlock = ({
   editor,

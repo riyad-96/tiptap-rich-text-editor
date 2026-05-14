@@ -1,7 +1,7 @@
 import { useEditorState } from '@tiptap/react';
 import { BubbleMenu } from '@tiptap/react/menus';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '../../ui/button';
 import {
   AlignCenterIcon,
   AlignLeftIcon,

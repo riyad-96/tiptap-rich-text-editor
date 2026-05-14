@@ -1,7 +1,7 @@
 import { useEditorState } from '@tiptap/react';
 import { UnderlineIcon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '../../ui/button';
 
 import { useEditorProvider } from '../../hooks/use-editor-provider';
 import { Tooltip } from '../tooltip';

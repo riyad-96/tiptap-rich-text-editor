@@ -2,7 +2,7 @@ import {
   Tooltip as ShadcnTooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from '../ui/tooltip';
 
 import { useEditorProvider } from '../hooks/use-editor-provider';
 
